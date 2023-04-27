@@ -6,6 +6,8 @@ import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
 
+import java.time.LocalDate;
+
 public class TestVueling {
 
     static String url = "https://tickets.vueling.com/";
@@ -40,6 +42,23 @@ public class TestVueling {
         origen.sendKeys("MADRID");
         Actions actions = new Actions(driver);
         actions.sendKeys(origen, Keys.ENTER).build().perform();
+
+        //OBTENEMOS LA FECHA ACTUAL Y CALCULAMOS LAS FECHAS DE SALIDA Y VUELTA, 4 DIAS EN BASE A LA FECHA ACTUAL LA FECHA DE IDA
+        // Y LA FECHA DE VUELTA A TRES DIAS DE LA FECHA DE IDA
+        java.time.LocalDate now = java.time.LocalDate.now();
+        java.time.LocalDate fechaSalida = now.plusDays(4);
+        java.time.LocalDate fechaVuelta = fechaSalida.plusDays(3);
+
+
+        // BUSCAMOS LOS ELEMENTOS QUE REPRESENTAS LAS FECHAS DE SALIDA Y VUELTA Y LES HACEMOS CLICK
+        WebElement departureElement = driver.findElement(By.xpath("//td[@data-month='" + fechaSalida.getMonth() + "' and @data-year='" + fechaSalida.getYear() + "']"));
+        departureElement.click();
+        WebElement diaSalida = driver.findElement(By.xpath("//a[@class='ui-state-default']"));
+        diaSalida.sendKeys();
+        WebElement returnElement = driver.findElement(By.xpath("//div[@class='DayPicker-Day' and not(contains(@class, 'DayPicker-Day--disabled'))][@data-full='" + fechaVuelta.toString() + "']"));
+        returnElement.click();
+
+
 
 
 
