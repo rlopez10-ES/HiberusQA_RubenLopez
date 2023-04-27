@@ -1,6 +1,7 @@
 package InventarioTestSuite;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -44,11 +45,16 @@ public class IncrementoValorCarrito {
         WebElement numCart = driver.findElement(By.xpath("//a[@class='shopping_cart_link']"));
         String comprobacion = numCart.getText();
 
+        /*
         if (!comprobacion.equalsIgnoreCase("1")) {
             System.out.println("No hay o se agregaron mas de un producto al carrito");
         } else {
             System.out.println("Se agrego correctamente al carrito");
         }
+        */
+
+        //EN LUGAR DE LO ANTERIOR, ESTO SERIA MAS CORRECTO
+        Assert.assertEquals("No se agrego al carrito el producto o es distinto a 1", "1", comprobacion);
     }
 
 
