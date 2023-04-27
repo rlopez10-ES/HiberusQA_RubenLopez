@@ -41,9 +41,6 @@ public class TestVueling {
         Actions actions = new Actions(driver);
         actions.sendKeys(origen, Keys.ENTER).build().perform();
 
-        int nun = 32;
-
-        int num = 5345;
 
 
     }
