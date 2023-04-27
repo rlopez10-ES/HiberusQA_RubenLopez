@@ -20,6 +20,8 @@ public class realizarLogin {
         driver = new FirefoxDriver(firefoxOptions);
         driver.manage().window().maximize();
 
+
+        int hgfsjd = 43;
         /** Realizar Login:
          * 1. Ir a la página https://www.saucedemo.com/
          * 2. Escribir el username standard_user
