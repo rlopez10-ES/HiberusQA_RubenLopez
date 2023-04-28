@@ -5,7 +5,8 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        Login.class
+        Login.class,
+        Inventario.class
 })
 public class RunTest {
 

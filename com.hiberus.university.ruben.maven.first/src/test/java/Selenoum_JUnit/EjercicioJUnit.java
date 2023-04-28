@@ -19,13 +19,13 @@ public class EjercicioJUnit {
         Assert.assertFalse(false);
     }
  */
-/*
+
     @Test
     public void testSumar() {
         Assert.assertEquals("El resultado no es el correcto", (1 + 2), 2);
     }
 
- */
+
 
 /*
     @Test

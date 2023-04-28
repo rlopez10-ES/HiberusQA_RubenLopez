@@ -94,9 +94,11 @@ public class Login {
         WebElement errorMessage = null;
         try {
             errorMessage = driver.findElement(By.xpath("//h3[@data-test='error']"));
+            System.out.println("Se muestra: "+ errorMessage.getText());
         } catch (NoSuchElementException nsee) {
             Assert.fail("ERROR: El mensaje de error en el login no se visualiza");
         }
+
 
 /* COMO PASA TODO ESTO NO ES NECESARIO
         boolean isPresentErrorMenssege = errorMessage.isDisplayed();

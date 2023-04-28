@@ -1,15 +1,12 @@
 package Selenoum_JUnit;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.junit.*;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.*;
+import org.openqa.selenium.support.ui.*;
+
+import java.util.List;
 
 public class Inventario {
     WebDriver driver;
@@ -35,17 +32,7 @@ public class Inventario {
 
         //PASO 1: IR A LA PAGINA WEB
         driver.get(url);
-    }
-/*
-    Validar que el numero de resultados es 6:
-        1. Ir a la página https://www.saucedemo.com
-        2. Escribir el username standard_user
-        3. Escribir el password secret_sauce
-        4. Pulsar en el botón del Login.
-        5. Validar que el numero de productos mostrados es igual a 6.
-*/
-    @Test
-    public void validationNumberProductsIs6() throws InterruptedException {
+
         //PASO 2: ESCRIBIR EL USERNAME
         driver.findElement(By.xpath("//input[@data-test='username']"))
                 .sendKeys(username);
@@ -57,15 +44,48 @@ public class Inventario {
         //PASO 4: PULSAR EL BOTON LOGIN
         driver.findElement(By.xpath("//input[@data-test='login-button']"))
                 .click();
+    }
+/*
+    Validar que el numero de resultados es 6:
+        5. Validar que el numero de productos mostrados es igual a 6.
+*/
+    @Test
+    public void validationNumberProductsIs6() {
 
-        Thread.sleep(5000);
+        int expectedItems = 5;
+        int actualItems = driver.findElements(By.xpath("//div[@class='inventory_item']")).size();
+
         //PASO 5: VALIDAR QUE HAY 6 PRODUCTOS
-        int expectedCantidad = driver.findElements(By.xpath("//div[@class='inventory_item']")).size();
-
-        Assert.assertEquals("ERROR: No hay 6 productos y hay: " + expectedCantidad, 6, expectedCantidad);
+            Assert.assertEquals("No hay el numero de productos esperados", expectedItems, actualItems);
 
     }
+/*
+    Validar que existe el producto Sauce Labs Bolt T-Shirt en el inventario:
+        5. Validar que el producto Sauce Labs Bolt T-Shirt aparece en el inventario.
+ */
+    @Test
+    public void validationProductExist() {
 
+        //PASO 5: QUE UN PRODUCTO EXISTE
+        String expectedProduct = "Sauce Labs Bolt T-Shirt";
+        List<WebElement> itemsList = driver.findElements(By.className("inventory_item"));
+
+        for (int i = 0 ; i <= itemsList.size() ; i++) {
+            // OBTENER EL ELEMENTO ACTUAL
+            WebElement item = itemsList.get(i);
+
+            // OBTENER EL NOMBRE DE ESE ELEMENTO
+            String itemName = item.findElement(By.className("inventory_item_name")).getText();
+
+            //COMPROBAMOS SI ES EL BUSCAMOS
+
+        }
+
+
+
+        Assert.assertEquals("No hay el numero de productos esperados", expectedProduct, actualItems);
+
+    }
 
     @After
     public void tearDown() {
