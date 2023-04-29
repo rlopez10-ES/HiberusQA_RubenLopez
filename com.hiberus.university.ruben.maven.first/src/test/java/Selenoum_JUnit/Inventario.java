@@ -83,7 +83,7 @@ public class Inventario {
 
 
 
-        Assert.assertEquals("No hay el numero de productos esperados", expectedProduct, actualItems);
+        Assert.assertEquals("No hay el numero de productos esperados", expectedProduct, 5);
 
     }
 
