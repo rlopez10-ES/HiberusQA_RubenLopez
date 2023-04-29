@@ -1,4 +1,4 @@
-package Selenoum_JUnit;
+package Selenium_JUnit;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
