@@ -270,7 +270,7 @@ public class Inventario {
     }
 
 /*
-    Ordenar el inventario por precio de Menor a Mayor:
+    Ordenar el inventario por precio de Mayor a menor:
         5. Seleccionar el filtro PRICE (high to low)
         6. Validar que el filtro seleccionado, ordena por el orden de precio de mayor a menor
  */
@@ -281,7 +281,7 @@ public class Inventario {
         List<WebElement> originalListItem = driver.findElements(By.xpath("//div[@class='inventory_item']//div[@class='inventory_item_price']"));
 
 
-        //PASO 5: SELECCIONAMOS EL FILTRO LOW TO HIGH PARA ORDENAR EL INVENTARIO
+        //PASO 5: SELECCIONAMOS EL FILTRO HIHG TO LOW PARA ORDENAR EL INVENTARIO
         selectOption = new Select(driver.findElement(By.className("product_sort_container")));
         selectOption.selectByValue("hilo");
 
@@ -289,7 +289,7 @@ public class Inventario {
         List<WebElement> actualList = driver.findElements(By.xpath("//div[@class='inventory_item']//div[@class='inventory_item_price']"));
 
 
-        //PASO 6: VALIDAR QUE EL FILTRO REALMENTE ORDENA DE MENOR A MAYOR
+        //PASO 6: VALIDAR QUE EL FILTRO REALMENTE ORDENA DE MAYOR A MENOR
 
         //ORDENAMOS LA LISTA REALMENTE COGIENDO LA LISTA ORIGINAL
         List<WebElement> orderList = new ArrayList<>(originalListItem);
