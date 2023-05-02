@@ -1,4 +1,4 @@
-package Selenium_JUnit;
+package Selenium_JUnit.EJ_2_4;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.*;
@@ -80,7 +80,7 @@ public class Inventario {
         //RECORREMOS LA LISTA CON UN FOR
         for(int i = 0 ; i < itemsList.size() ; i++){
             WebElement item = itemsList.get(i);
-            String itemName = item.findElement(By.className("inventory_item_name")).getText();
+            String itemName = item.findElement(By.xpath("//div[@class='inventory_item_name']")).getText();
 
             if (itemName.equalsIgnoreCase(itemSearch)) {
                 itemExists = true;
@@ -130,7 +130,7 @@ public class Inventario {
         WebElement addToCartButton = driver.findElement(By.xpath("//div[text()='" + item + "']/ancestor::div[@class='inventory_item_description']//button[@data-test='add-to-cart-sauce-labs-bolt-t-shirt']"));
         addToCartButton.click();
 
-        //PASO 6: ELIMINAMO EL PRODUCTO
+        //PASO 6: ELIMINAMOS EL PRODUCTO
         WebElement removeButton = driver.findElement(By.xpath("//div[text()='" + item + "']/ancestor::div[@class='inventory_item_description']//button[@data-test='remove-sauce-labs-bolt-t-shirt']"));
         removeButton.click();
 
@@ -150,13 +150,16 @@ public class Inventario {
  */
     @Test
     public void addProductsToCart() {
+
         List<WebElement> itemsList = driver.findElements(By.xpath("//div[@class='inventory_item']"));
 
         //PASO 5: AGREGAMOS 3 PRODUCTOS AL AZAR
 
         //SELECCIONAMOS 3 PRODUCTOS SIN REPETICION
+        int productosAdd = 3;
+
         ArrayList<Integer> selectedItems = new ArrayList<>();
-        while (selectedItems.size() < 3) {
+        while (selectedItems.size() < productosAdd) {
             int index = new Random().nextInt(itemsList.size());
             if (!selectedItems.contains(index)) {
                 selectedItems.add(index);
@@ -164,7 +167,7 @@ public class Inventario {
         }
 
         //AÑADIMOS LOS PRODUCTOS AL CARRITO
-        for (int i = 0; i < selectedItems.size(); i++) {
+        for (int i = 0 ; i < selectedItems.size() ; i++) {
             WebElement productElement = itemsList.get(selectedItems.get(i));
             WebElement addToCartButton = productElement.findElement(By.xpath("//button[text()='Add to cart']"));
             addToCartButton.click();
@@ -175,7 +178,7 @@ public class Inventario {
         String numShoppingCart = shoppingCart.getText();
         String expectedItems = "3";
 
-        Assert.assertEquals("No hay 3 productos y hay: " + numShoppingCart , numShoppingCart, numShoppingCart );
+        Assert.assertEquals("No hay 3 productos y hay: " + numShoppingCart , expectedItems, numShoppingCart );
     }
 
 /*
