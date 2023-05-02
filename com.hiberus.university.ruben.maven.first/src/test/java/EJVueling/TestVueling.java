@@ -58,12 +58,12 @@ public class TestVueling {
         WebElement elementoFechaSalida = driver.findElement(By.xpath("//td[@data-handler='selectDay' and @data-month='" + (fechaSalida.getMonthValue()-1) + "' and @data-year='" + fechaSalida.getYear() + "']//a[text()='" + fechaSalida.getDayOfMonth() + "']"));
         elementoFechaSalida.click();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//td[@data-handler='selectDay']")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//td[@data-handler='selectDay']"))).click();
 
         WebElement elementoFechaVuelta = driver.findElement(By.xpath("//td[@data-handler='selectDay' and @data-month='" + (fechaVuelta.getMonthValue()-1) + "' and @data-year='" + fechaVuelta.getYear() + "']//a[text()='" + fechaVuelta.getDayOfMonth() + "']"));
         elementoFechaVuelta.click();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//td[@data-handler='selectDay']")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//td[@data-handler='selectDay']"))).click();
 
         //SELECCIONAMOS QUE SEA PARA 2 ADULTOS Y 1 NIÑO
         int numAdultos = 2;
