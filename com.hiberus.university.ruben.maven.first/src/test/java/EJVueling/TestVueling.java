@@ -52,7 +52,7 @@ public class TestVueling {
         java.time.LocalDate fechaVuelta = fechaSalida.plusDays(3);
 
 
-
+        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='AvailabilitySearchInputSearchView_TextBoxMarketDestination1']")));
 
         // BUSCAMOS LOS ELEMENTOS QUE REPRESENTAS LAS FECHAS DE SALIDA Y VUELTA Y LES HACEMOS CLICK
         WebElement elementoFechaSalida = driver.findElement(By.xpath("//td[@data-handler='selectDay' and @data-month='" + (fechaSalida.getMonthValue()-1) + "' and @data-year='" + fechaSalida.getYear() + "']//a[text()='" + fechaSalida.getDayOfMonth() + "']"));
