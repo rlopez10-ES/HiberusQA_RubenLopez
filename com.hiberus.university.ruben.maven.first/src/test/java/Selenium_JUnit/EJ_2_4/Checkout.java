@@ -72,7 +72,7 @@ public class Checkout {
     @Test
     public void checkFinalPrice() {
 
-        List<WebElement> itemsList = driver.findElements(By.xpath("//div[@class='inventory_item']"));
+        List<WebElement> itemsList = driver.findElements(By.xpath("//div[@class='inventory_item_price']"));
 
         //PASO 5: AGREGAMOS 3 PRODUCTOS AL AZAR
 
@@ -87,11 +87,19 @@ public class Checkout {
             }
         }
 
+        //REALIZAMOS LA SUMA DE LOS PRODUCTOS QUE SE HAN SELECCIONADO
+        double sumaProductos = 0.0 + 1;
+        String sumaTotal = "";
+
         //AÑADIMOS LOS PRODUCTOS AL CARRITO
         for (int i = 0 ; i < selectedItems.size() ; i++) {
             WebElement productElement = itemsList.get(selectedItems.get(i));
-            WebElement addToCartButton = productElement.findElement(By.xpath("//button[text()='Add to cart']"));
-            addToCartButton.click();
+
+            String price = productElement.findElement(By.xpath("..//div[@class='inventory_item_price']")).getText().replace("$", "");
+            sumaTotal = String.valueOf(sumaProductos += Double.parseDouble(price));
+
+            productElement.findElement(By.xpath("..//button[text()='Add to cart']"))
+                    .click();
         }
 
         //PASO 6: VAMOS AL CARRITO
@@ -121,22 +129,11 @@ public class Checkout {
 
         //RECOGEMOS EL PRECIO TOTAL QUE CALCULA LA PAGINA
         WebElement totalPrice = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='summary_subtotal_label']")));
-        String priceText = totalPrice.getText().replace("$", "");
-        double itemTotalPrice = Double.parseDouble(priceText);
 
-        //REALIZAMOS LA SUMA DE LOS PRODUCTOS QUE SE HAN SELECCIONADO
-        double sumaProductos = 0.0;
+        String []priceText = totalPrice.getText().split("\\$");
 
-        for (int i = 0 ; i < selectedItems.size() ; i++) {
-            WebElement productElement = wait.until(ExpectedConditions.visibilityOf(itemsList.get(selectedItems.get(i))));
-            String price = productElement.findElement(By.xpath("..//div[@class='inventory_item_price']")).getText().substring(1);
+        Assert.assertEquals("El total no se corresponde a la suma de los articulos seleccionados", priceText[1], sumaTotal);
 
-            //String precio = price.getText().substring(1);
-            //double priceToDouble = Double.parseDouble(precio);
-            sumaProductos += Double.parseDouble(price);
-        }
-
-        Assert.assertEquals("El total no se corresponde a la suma de los articulos seleccionados", sumaProductos, itemTotalPrice);
     }
 
 
@@ -197,7 +194,7 @@ public class Checkout {
                 .click();
 
         //PASO 9: HACEMOS EL CHECKOUT FINAL PULSANDO FINISH
-        driver.findElement(By.xpath("button[@data-test='finish']"))
+        driver.findElement(By.xpath("//button[@data-test='finish']"))
                 .click();
 
         //PASO 10: VERIFICAMOS QUE SALE EL MENSAJE DE PEDIDO REALIZADO
