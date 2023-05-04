@@ -60,15 +60,15 @@ public class Checkout {
     }
 
 
-/*
-    Comprobar el precio final del Checkout de varios productos:
-        5. Agregar al carrito los 3 productos elegidos al azar.
-        6. Ir al carrito.
-        7. Realizar el Checkout del producto.
-        8. Rellenar datos del checkout y continuar.
-        9. Finalizar Checkout
-        10. Validar que el precio total del pedido (Item total) es la suma del importe de los productos seleccionados en el inventario
- */
+    /*
+        Comprobar el precio final del Checkout de varios productos:
+            5. Agregar al carrito los 3 productos elegidos al azar.
+            6. Ir al carrito.
+            7. Realizar el Checkout del producto.
+            8. Rellenar datos del checkout y continuar.
+            9. Finalizar Checkout
+            10. Validar que el precio total del pedido (Item total) es la suma del importe de los productos seleccionados en el inventario
+     */
     @Test
     public void checkFinalPrice() {
 
@@ -137,15 +137,15 @@ public class Checkout {
     }
 
 
-/*
-    Realizar un pedido:
-        5. Agregar al carrito 1 producto elegido al azar.
-        6. Ir al carrito.
-        7. Realizar el Checkout del producto.
-        8. Rellenar datos del checkout y continuar.
-        9. Finalizar Checkout
-        10. Validar que el pedido a finalizado correctamente mostrando el mensaje “Your order has been dispatched, and will arrive just as fast as the pony can get there!”
- */
+    /*
+        Realizar un pedido:
+            5. Agregar al carrito 1 producto elegido al azar.
+            6. Ir al carrito.
+            7. Realizar el Checkout del producto.
+            8. Rellenar datos del checkout y continuar.
+            9. Finalizar Checkout
+            10. Validar que el pedido a finalizado correctamente mostrando el mensaje “Your order has been dispatched, and will arrive just as fast as the pony can get there!”
+     */
     @Test
     public void makeOrder() {
 
