@@ -98,12 +98,27 @@ public class Caso01 {
 
         driver.findElement(By.xpath("//a[@data-n-adults='" + numAdultos + "']")).click();
 
+        //PULSAMOS EL BOTON DE BUSCAR
+        driver.findElement(By.xpath("//div[@id='divButtonBuscadorNormal']")).click();
+
+
+    }
+
+    @Test
+    public void oneChild() {
+        int children = 1;
+
+        selectOption = new Select(driver.findElement(By.xpath("//select[@id='AvailabilitySearchInputSearchView_DropDownListPassengerType_CHD']")));
+        selectOption.selectByValue(""+children+"");
+
+        //PULSAMOS EL BOTON DE BUSCAR
+        driver.findElement(By.xpath("//div[@id='divButtonBuscadorNormal']")).click();
 
     }
 
 
     @After
     public void tearDown() {
-        driver.close();
+        //driver.close();
     }
 }

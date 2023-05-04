@@ -88,7 +88,7 @@ public class Checkout {
         }
 
         //REALIZAMOS LA SUMA DE LOS PRODUCTOS QUE SE HAN SELECCIONADO
-        double sumaProductos = 0.0 + 1;
+        double sumaProductos = 0.0 ;
         String sumaTotal = "";
 
         //AÑADIMOS LOS PRODUCTOS AL CARRITO
@@ -132,7 +132,7 @@ public class Checkout {
 
         String []priceText = totalPrice.getText().split("\\$");
 
-        Assert.assertEquals("El total no se corresponde a la suma de los articulos seleccionados", priceText[1], sumaTotal);
+        Assert.assertEquals("El total no se corresponde a la suma de los articulos seleccionados", Double.parseDouble(priceText[1]), sumaProductos, 0.01);
 
     }
 
