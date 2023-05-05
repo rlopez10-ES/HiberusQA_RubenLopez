@@ -1,6 +1,6 @@
-package Selenium_JUnit.EJ_2_4;
+package Selenium.Selenium_JUnit.EJ_2_4;
 
-import Selenium_JUnit.Login;
+import Selenium.Selenium_JUnit.Login;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 

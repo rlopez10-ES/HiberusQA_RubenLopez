@@ -1,20 +1,17 @@
-package InventarioTestSuite;
+package Selenium.InventarioTestSuite;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class IncrementoValorCarrito {
-
+public class VisibilidadRemove {
     private static String url = "https://www.saucedemo.com/" ;
     static WebDriver driver;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         WebDriverManager.chromedriver().setup();
         ChromeOptions chromeOptions = new ChromeOptions();
 
@@ -38,23 +35,29 @@ public class IncrementoValorCarrito {
         buttonLogin.click();
 
         //BUSCAMOS EL BOTON DEL PRODUCTO Y LE DAMOS CLICK
-        WebElement addToCart = driver.findElement(By.xpath("//button[@data-test='add-to-cart-sauce-labs-bolt-t-shirt']"));
+        WebElement addToCart = driver.findElement(By.xpath("//button[@data-test='add-to-cart-sauce-labs-onesie']"));
         addToCart.click();
 
-        //COMPROBAMOS QUE SE AÑADE AL CARRITO Y CAMBIA A 1
-        WebElement numCart = driver.findElement(By.xpath("//a[@class='shopping_cart_link']"));
-        String comprobacion = numCart.getText();
+        Thread.sleep(5000);
 
-        /*
-        if (!comprobacion.equalsIgnoreCase("1")) {
-            System.out.println("No hay o se agregaron mas de un producto al carrito");
+        //COMPROBAMOS QUE AHORA ES EL BOTON DE REMOVE
+        WebElement btnRemove = driver.findElement(By.xpath("//button[@data-test='remove-sauce-labs-onesie']"));
+        String comprobarRmv = btnRemove.getText();
+
+        if (comprobarRmv.equalsIgnoreCase("REMOVE")){
+            System.out.println("Se muestra del boton REMOVE");
         } else {
-            System.out.println("Se agrego correctamente al carrito");
+            System.out.println("No ha cambiado a REMOVE");
+        }
+        /*  OTRA FORMA CON TRY CATCH
+        try {
+            wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//button[@data-test='remove-sauce-labs-onesie']"))));
+        } catch (NoSuchElementException nsee) {
+            System.out.println("ERROR: No se encuentra el elemento a comprobar");
+        } catch (TimeoutException te) {
+            System.out.println("No aparece el boton REMOVE");
         }
         */
-
-        //EN LUGAR DE LO ANTERIOR, ESTO SERIA MAS CORRECTO
-        Assert.assertEquals("No se agrego al carrito el producto o es distinto a 1", "1", comprobacion);
     }
 
 

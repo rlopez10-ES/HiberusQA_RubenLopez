@@ -1,6 +1,7 @@
-package InventarioTestSuite;
+package Selenium.InventarioTestSuite;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,14 +9,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.List;
-
-public class ValidadNumResultados {
+public class IncrementoValorCarrito {
 
     private static String url = "https://www.saucedemo.com/" ;
     static WebDriver driver;
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
         WebDriverManager.chromedriver().setup();
         ChromeOptions chromeOptions = new ChromeOptions();
 
@@ -38,21 +37,26 @@ public class ValidadNumResultados {
         WebElement buttonLogin = driver.findElement(By.xpath("//input[@data-test='login-button']"));
         buttonLogin.click();
 
-        //VALIDAMOS QUE SON 6 LOS ITEMS QUE HAY
-        List<WebElement> elementos = driver.findElements(By.xpath("//div[@class='inventory_item']"));
-        int cantidad = elementos.size();
+        //BUSCAMOS EL BOTON DEL PRODUCTO Y LE DAMOS CLICK
+        WebElement addToCart = driver.findElement(By.xpath("//button[@data-test='add-to-cart-sauce-labs-bolt-t-shirt']"));
+        addToCart.click();
 
-        /* O CON ESTO
-        int cantidad = driver.findElements(By.xpath("//div[@class='inventory_item']")).size();
+        //COMPROBAMOS QUE SE AÑADE AL CARRITO Y CAMBIA A 1
+        WebElement numCart = driver.findElement(By.xpath("//a[@class='shopping_cart_link']"));
+        String comprobacion = numCart.getText();
+
+        /*
+        if (!comprobacion.equalsIgnoreCase("1")) {
+            System.out.println("No hay o se agregaron mas de un producto al carrito");
+        } else {
+            System.out.println("Se agrego correctamente al carrito");
+        }
         */
 
-
-        if (cantidad != 6){
-            System.out.println("No hay 6 objetos en el inventario");
-        } else {
-            System.out.println("Hay 6 objetos en el inventario");
-        }
+        //EN LUGAR DE LO ANTERIOR, ESTO SERIA MAS CORRECTO
+        Assert.assertEquals("No se agrego al carrito el producto o es distinto a 1", "1", comprobacion);
     }
+
 
     static void enviarTexto(WebElement elemento, String texto) {
         elemento.clear();

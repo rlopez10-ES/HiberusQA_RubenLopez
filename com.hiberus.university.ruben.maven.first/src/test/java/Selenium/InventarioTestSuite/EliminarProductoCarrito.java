@@ -1,13 +1,14 @@
-package InventarioTestSuite;
+package Selenium.InventarioTestSuite;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class VisibilidadRemove {
+public class EliminarProductoCarrito {
     private static String url = "https://www.saucedemo.com/" ;
     static WebDriver driver;
 
@@ -40,24 +41,22 @@ public class VisibilidadRemove {
 
         Thread.sleep(5000);
 
-        //COMPROBAMOS QUE AHORA ES EL BOTON DE REMOVE
+        //RECOGEMOS EL BOTON DE REMOVE Y LO CLICKAMOS
         WebElement btnRemove = driver.findElement(By.xpath("//button[@data-test='remove-sauce-labs-onesie']"));
-        String comprobarRmv = btnRemove.getText();
+        btnRemove.click();
 
-        if (comprobarRmv.equalsIgnoreCase("REMOVE")){
-            System.out.println("Se muestra del boton REMOVE");
+        Thread.sleep(5000);
+
+        //COMPROBAMOS QUE SE HA ELIMINADO DEL CARRITO DEL PRODUCTO
+        WebElement shopCart = driver.findElement(By.xpath("//a[@class='shopping_cart_link']"));
+        String comprobacion = shopCart.getText();
+
+        if (comprobacion.equalsIgnoreCase("")) {
+            System.out.println("No hay nada en el carrito, por lo que se elimino");
         } else {
-            System.out.println("No ha cambiado a REMOVE");
+            System.out.println("Hay productos, por lo que no se elimino");
         }
-        /*  OTRA FORMA CON TRY CATCH
-        try {
-            wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//button[@data-test='remove-sauce-labs-onesie']"))));
-        } catch (NoSuchElementException nsee) {
-            System.out.println("ERROR: No se encuentra el elemento a comprobar");
-        } catch (TimeoutException te) {
-            System.out.println("No aparece el boton REMOVE");
-        }
-        */
+
     }
 
 

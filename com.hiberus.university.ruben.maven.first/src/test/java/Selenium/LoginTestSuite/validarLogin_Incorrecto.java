@@ -1,4 +1,4 @@
-package LoginTestSuite;
+package Selenium.LoginTestSuite;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;

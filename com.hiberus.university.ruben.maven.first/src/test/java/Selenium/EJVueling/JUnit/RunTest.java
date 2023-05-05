@@ -1,4 +1,4 @@
-package EJVueling.JUnit;
+package Selenium.EJVueling.JUnit;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

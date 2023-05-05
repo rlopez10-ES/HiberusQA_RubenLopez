@@ -1,4 +1,4 @@
-package Selenium_JUnit;
+package Selenium.Selenium_JUnit;
 
 import org.junit.*;
 
