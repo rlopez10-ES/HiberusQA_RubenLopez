@@ -1,4 +1,4 @@
-package Selenium.Selenium_JUnit;
+package Selenium.Selenium_JUnit.EJ_2_4;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
