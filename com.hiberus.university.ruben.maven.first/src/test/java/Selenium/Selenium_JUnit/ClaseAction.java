@@ -174,6 +174,8 @@ public class ClaseAction {
      6. Pegar la dirección copiada en el cuadro de texto de la “Permanent Address”
      7. Validar que el texto de la “Current Address” y de la “Permanent Address” son el  mismo.
   */
+
+    @Test
     public void keyBoardEvents() {
 
         driver.get("https://demoqa.com/text-box");
