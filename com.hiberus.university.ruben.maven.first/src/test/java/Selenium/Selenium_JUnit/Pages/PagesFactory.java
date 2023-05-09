@@ -11,11 +11,17 @@ public class PagesFactory {
 
     private final LoginPage loginPage;
     private final CartPage cartPage;
+    private final CheckoutStepOnePage checkoutStepOnePage;
+    private final CheckoutStepSecondPage checkoutStepSecondPage;
+    private final InventoryPage inventoryPage;
 
     private PagesFactory(WebDriver driver) {
         this.driver = driver;
         loginPage = new LoginPage(driver);
         cartPage = new CartPage(driver);
+        checkoutStepOnePage = new CheckoutStepOnePage(driver);
+        checkoutStepSecondPage = new CheckoutStepSecondPage(driver);
+        inventoryPage = new InventoryPage(driver);
 
         // inicializar nuestras Pages
     }

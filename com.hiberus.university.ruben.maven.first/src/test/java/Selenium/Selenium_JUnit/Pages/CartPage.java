@@ -44,7 +44,7 @@ public class CartPage extends AbstactPage{
         try {
             checkOutButton.click();
         } catch (TimeoutException ex) {
-            log.info("Timeout clicking login : " + ex.getClass().getSimpleName());
+            log.info("Timeout clicking Checkout : " + ex.getClass().getSimpleName());
         }
     }
 
@@ -54,7 +54,7 @@ public class CartPage extends AbstactPage{
         try {
             continueShoppingButton.click();
         } catch (TimeoutException ex) {
-            log.info("Timeout clicking login : " + ex.getClass().getSimpleName());
+            log.info("Timeout clicking Continue Shopping : " + ex.getClass().getSimpleName());
         }
     }
 
@@ -63,4 +63,6 @@ public class CartPage extends AbstactPage{
 
         return itemCount;
     }
+
+
 }
