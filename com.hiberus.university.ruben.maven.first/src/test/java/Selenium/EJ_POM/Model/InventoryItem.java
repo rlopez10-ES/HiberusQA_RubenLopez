@@ -1,4 +1,4 @@
-package Selenium.Selenium_JUnit.Model;
+package Selenium.EJ_POM.Model;
 
 import lombok.*;
 

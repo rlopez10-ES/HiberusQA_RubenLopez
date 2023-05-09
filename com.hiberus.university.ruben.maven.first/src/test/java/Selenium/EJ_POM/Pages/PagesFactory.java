@@ -1,4 +1,4 @@
-package Selenium.Selenium_JUnit.Pages;
+package Selenium.EJ_POM.Pages;
 
 import org.openqa.selenium.WebDriver;
 
@@ -32,5 +32,17 @@ public class PagesFactory {
 
     public WebDriver getDriver() {
         return driver;
+    }
+
+    public static PagesFactory getInstance() {
+        return pagesFactory;
+    }
+
+    public LoginPage getLoginPage() {
+        return loginPage;
+    }
+
+    public InventoryPage getInventoryPage() {
+        return inventoryPage;
     }
 }

@@ -1,4 +1,4 @@
-package Selenium.Selenium_JUnit.Pages;
+package Selenium.EJ_POM.Pages;
 
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.TimeoutException;
@@ -17,7 +17,7 @@ public class LoginPage extends AbstactPage{
     @FindBy(id = "password")
     private  WebElement passwordInput;
 
-    @FindBy(id = "login-buttom")
+    @FindBy(id = "login-button")
     private  WebElement loginButton;
 
     @FindBy(xpath = "//h3[@data-test='error']")

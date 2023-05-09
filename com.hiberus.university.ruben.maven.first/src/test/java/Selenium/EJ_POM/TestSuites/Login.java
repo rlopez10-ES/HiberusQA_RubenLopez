@@ -1,4 +1,4 @@
-package Selenium.Selenium_JUnit.EJ_2_4;
+package Selenium.EJ_POM.TestSuites;
 
 import Selenium.EJ_POM.Pages.InventoryPage;
 import Selenium.EJ_POM.Pages.LoginPage;
@@ -9,13 +9,8 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
@@ -31,7 +26,7 @@ public class Login {
 
     @Before
     public void setUp() {
-
+        
         WebDriverManager.chromedriver().setup();
 
         driver = new ChromeDriver();
@@ -80,7 +75,7 @@ public class Login {
         loginPage.enterPassword("132");
         loginPage.clickLogin();
 
-        Assert.assertEquals("Prueba fallida, no se encuentra el elemento", loginPage.hasUsernamePasswordError());
+        Assert.assertTrue("Prueba fallida, no se encuentra el elemento", loginPage.hasUsernamePasswordError());
 
     }
 
