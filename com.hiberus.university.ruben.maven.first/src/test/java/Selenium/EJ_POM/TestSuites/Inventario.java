@@ -24,6 +24,9 @@ public class Inventario {
     WebDriverWait wait;
     Select selectOption;
 
+    String []action = {"add-to-cart", "remove"};
+
+
     public LoginPage loginPage;
     public InventoryPage inventoryPage;
 
@@ -56,9 +59,7 @@ public class Inventario {
     @Test
     public void validationNumberProductsIs6() {
 
-        int numItems = inventoryPage.numberItemList();
-
-        Assert.assertEquals("ERROR: No hay 6 productos y hay: " + numItems, 6, numItems);
+        Assert.assertEquals("ERROR: No hay 6 productos y hay: " + inventoryPage.numberItemList(), 6, inventoryPage.numberItemList());
 
     }
 
@@ -69,27 +70,10 @@ public class Inventario {
     @Test
     public void validationProductExist() {
 
-        //PASO 5: VALIDAR QUE EN EL INVENTARIO EXISTE UN PRODUCTO
+        String nombreProducto = "Sauce Labs Bolt T-Shirt";
 
-        //OBTENEMOS LOS ITEMS DE LA LISTA
-        List<WebElement> itemsList = driver.findElements(By.xpath("//div[@class='inventory_item']"));
+        Assert.assertTrue("El producto que trata de buscar no se encuentra en el inventario", inventoryPage.existProductInInventoryList(nombreProducto));
 
-        boolean itemExists = false;
-        String itemSearch = "Sauce Labs Bolt T-Shirt";
-
-        //RECORREMOS LA LISTA CON UN FOR
-        for(int i = 0 ; i < itemsList.size() ; i++){
-            WebElement item = itemsList.get(i);
-            String itemName = item.findElement(By.xpath("//div[@class='inventory_item_name']")).getText();
-
-            if (itemName.equalsIgnoreCase(itemSearch)) {
-                itemExists = true;
-                break; //SALIMOS DEL BUCLE CON BREAK SI ENCONTRAMOS EL ELEMENTO
-            }
-        }
-
-        //VERIFICAMOS SI EL ELEMENTO ESTA EN LA LISTA
-        Assert.assertTrue("El producto Sauce Labs Bolt T-Shirt no se encentra en la lista", itemExists);
     }
 
 
@@ -101,17 +85,11 @@ public class Inventario {
     @Test
     public void addProductToCart() {
 
-        //PASO 5: AGREGAMOS EL PRODUCTO Sauce Labs Bolt T-Shirt
         String item = "Sauce Labs Bolt T-Shirt";
+        inventoryPage.itemAddOrRemove(item, action[0]);
 
-        WebElement addToCartButton = driver.findElement(By.xpath("//div[text()='" + item + "']/ancestor::div[@class='inventory_item_description']//button"));
-        addToCartButton.click();
+        Assert.assertEquals("No se agrego el producto ya que hay: " + inventoryPage.numberProductsCart() + " productos en el carrito", "1" , inventoryPage.numberProductsCart());
 
-        //PASO 6: VERIFICAMOS QUE SE HA AÑADIDO AL CARRITO
-        WebElement numCart = driver.findElement(By.xpath("//a[@class='shopping_cart_link']"));
-        String comprobacion = numCart.getText();
-
-        Assert.assertEquals("No se agrego el producto ya que hay: " + numCart.getText() + " productos en el carrito", "1" , comprobacion);
     }
 
 /*

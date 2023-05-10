@@ -21,8 +21,15 @@ public class InventoryPage extends AbstactPage{
     @FindBy(id = "shopping_cart_container")
     private WebElement shoppingCartElement;
 
+    @FindBy(xpath = "//span[@class='shopping_cart_badge']")
+    private WebElement shoppingCartNumber;
+
     @FindBy(xpath = "//div[@class='inventory_item']")
     private List<WebElement> inventoryList;
+
+    @FindBy(xpath = "//div[@class='inventory_item_name']")
+    private List<WebElement> inventoryNameList;
+
 
     @FindBy(xpath = "//select[@data-test='product_sort_container']")
     private WebElement productSortContainerSelect;
@@ -47,19 +54,16 @@ public class InventoryPage extends AbstactPage{
 
     public void itemAddOrRemove(String itemName, String action) {
         String name = itemName.replace(" ", "-").toLowerCase();
-        String xpath = "//button['" + action + "-" + name + "]";
+        String xpath = "//button['" + action + "-" + name + "']";
         WebElement itemElem = getDriver().findElement(By.xpath(xpath));
         itemElem.click();
     }
 
     public boolean existProductInInventoryList(String itemName) {
+
         boolean itemExists = false;
-
-        for(int i = 0 ; i < inventoryList.size() ; i++){
-            WebElement item = inventoryList.get(i);
-            String itemNameToConfirm = item.findElement(By.xpath("//div[@class='inventory_item_name']")).getText();
-
-            if (itemName.equalsIgnoreCase(itemName)) {
+        for (int i = 0; i < inventoryNameList.size(); i++) {
+            if (inventoryNameList.get(i).getText().equals(itemName)) {
                 itemExists = true;
                 break; //SALIMOS DEL BUCLE CON BREAK SI ENCONTRAMOS EL ELEMENTO
             }
@@ -71,6 +75,12 @@ public class InventoryPage extends AbstactPage{
         int totalItems = inventoryList.size();
 
         return totalItems;
+    }
+
+    public String numberProductsCart() {
+        String totalCartItems = shoppingCartNumber.getText();
+
+        return totalCartItems;
     }
 /*
     public void remove(){
