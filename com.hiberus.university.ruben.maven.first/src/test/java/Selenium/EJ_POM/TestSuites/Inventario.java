@@ -102,21 +102,13 @@ public class Inventario {
     @Test
     public void removeProduct() {
 
-        //PASO 5: AGREGAMOS EL PRODUCTO Sauce Labs Bolt T-Shirt
         String item = "Sauce Labs Bolt T-Shirt";
+        inventoryPage.itemAddOrRemove(item, action[0]);
 
-        WebElement addToCartButton = driver.findElement(By.xpath("//div[text()='" + item + "']/ancestor::div[@class='inventory_item_description']//button[@data-test='add-to-cart-sauce-labs-bolt-t-shirt']"));
-        addToCartButton.click();
+        inventoryPage.itemAddOrRemove(item, action[1]);
 
-        //PASO 6: ELIMINAMOS EL PRODUCTO
-        WebElement removeButton = driver.findElement(By.xpath("//div[text()='" + item + "']/ancestor::div[@class='inventory_item_description']//button[@data-test='remove-sauce-labs-bolt-t-shirt']"));
-        removeButton.click();
+        Assert.assertEquals("No se elimino el producto: " + inventoryPage.numberProductsCart() + " productos en el carrito", "" , inventoryPage.numberProductsCart());
 
-        //PASO 7: VALIDAMOS QUE SE ELIMINO EL PRODUCTO
-        WebElement numCart = driver.findElement(By.xpath("//a[@class='shopping_cart_link']"));
-        String comprobacion = numCart.getText();
-
-        Assert.assertEquals("No se elimino el producto ya que hay: " + numCart.getText() + " productos en el carrito", "" , comprobacion);
 
     }
 
@@ -129,34 +121,10 @@ public class Inventario {
     @Test
     public void addProductsToCart() {
 
-        List<WebElement> itemsList = driver.findElements(By.xpath("//div[@class='inventory_item']"));
+        int expectedItems = 3;
+        inventoryPage.addRandomProducts(3);
 
-        //PASO 5: AGREGAMOS 3 PRODUCTOS AL AZAR
-
-        //SELECCIONAMOS 3 PRODUCTOS SIN REPETICION
-        int productosAdd = 3;
-
-        ArrayList<Integer> selectedItems = new ArrayList<>();
-        while (selectedItems.size() < productosAdd) {
-            int index = new Random().nextInt(itemsList.size());
-            if (!selectedItems.contains(index)) {
-                selectedItems.add(index);
-            }
-        }
-
-        //AÑADIMOS LOS PRODUCTOS AL CARRITO
-        for (int i = 0 ; i < selectedItems.size() ; i++) {
-            WebElement productElement = itemsList.get(selectedItems.get(i));
-            WebElement addToCartButton = productElement.findElement(By.xpath("//button[text()='Add to cart']"));
-            addToCartButton.click();
-        }
-
-        //PASO 6: VALIDAMOS QUE  SE HAN AGREGADO 3 PRODUCTOS
-        WebElement shoppingCart = driver.findElement(By.xpath("//a[@class='shopping_cart_link']"));
-        String numShoppingCart = shoppingCart.getText();
-        String expectedItems = "3";
-
-        Assert.assertEquals("No hay 3 productos y hay: " + numShoppingCart , expectedItems, numShoppingCart );
+        Assert.assertEquals("No hay 3 productos y hay: " + inventoryPage.numberProductsCart() , String.valueOf(expectedItems), inventoryPage.numberProductsCart() );
     }
 
 /*
@@ -171,9 +139,8 @@ public class Inventario {
         List<WebElement> originalListItem = driver.findElements(By.xpath("//div[@class='inventory_item']"));
 
 
-        //PASO 5: SELECCIONAMOS EL FILTRO Z TO A PARA ORDENAR EL INVENTARIO
-        selectOption = new Select(driver.findElement(By.className("product_sort_container")));
-        selectOption.selectByVisibleText("Name (Z to A)");
+        inventoryPage.sortInventory("Name (Z to A)");
+
 
         //CREAMOS OTRA LISTA COGIENDO LOS ELEMENTOS ACTUALES DE LA PAGINA TRAS APLICAR EL FILTRO
         List<WebElement> actualList = driver.findElements(By.xpath("//div[@class='inventory_item']"));
@@ -189,14 +156,6 @@ public class Inventario {
             return nombre2.compareTo(nombre1);
         });
 
-        /*
-        System.out.println("Lista 3");
-        for(int i = 0 ; i < actualList.size() ; i++){
-            WebElement item = actualList.get(i);
-            String itemName = item.findElement(By.className("inventory_item_name")).getText();
-            System.out.println(itemName);
-        }
-         */
 
         Assert.assertEquals("La lista no se ordeno al aplicar el filtro", orderList, actualList);
 
@@ -212,14 +171,7 @@ public class Inventario {
 
         //OBTEMOS LA LISTA ORIGINAL
         List<WebElement> originalListItem = driver.findElements(By.xpath("//div[@class='inventory_item']//div[@class='inventory_item_price']"));
-       /*
-       for(int i = 0 ; i < originalListItem.size() ; i++){
-            WebElement item = originalListItem.get(i);
-            //String itemName = item.findElement(By.xpath(".//div[@class='inventory_item_price']")).getText();
-            System.out.println(item.getText());
-        }
 
-        */
 
         //PASO 5: SELECCIONAMOS EL FILTRO LOW TO HIGH PARA ORDENAR EL INVENTARIO
         selectOption = new Select(driver.findElement(By.className("product_sort_container")));

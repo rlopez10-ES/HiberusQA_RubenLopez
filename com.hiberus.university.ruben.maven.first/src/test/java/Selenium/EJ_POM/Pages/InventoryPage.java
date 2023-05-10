@@ -7,8 +7,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Slf4j
 public class InventoryPage extends AbstactPage{
@@ -21,7 +24,7 @@ public class InventoryPage extends AbstactPage{
     @FindBy(id = "shopping_cart_container")
     private WebElement shoppingCartElement;
 
-    @FindBy(xpath = "//span[@class='shopping_cart_badge']")
+    @FindBy(xpath = "//a[@class='shopping_cart_link']")
     private WebElement shoppingCartNumber;
 
     @FindBy(xpath = "//div[@class='inventory_item']")
@@ -30,12 +33,8 @@ public class InventoryPage extends AbstactPage{
     @FindBy(xpath = "//div[@class='inventory_item_name']")
     private List<WebElement> inventoryNameList;
 
-
-    @FindBy(xpath = "//select[@data-test='product_sort_container']")
-    private WebElement productSortContainerSelect;
-
     @FindBy(xpath = "//select[@data-test='product_sort_container']/option")
-    private List<WebElement> options;
+    private Select options;
 
     @FindBy(xpath = "//a[@id='logout_sidebar_link']")
     private WebElement logoutButton;
@@ -54,7 +53,7 @@ public class InventoryPage extends AbstactPage{
 
     public void itemAddOrRemove(String itemName, String action) {
         String name = itemName.replace(" ", "-").toLowerCase();
-        String xpath = "//button['" + action + "-" + name + "']";
+        String xpath = "//button[@id='" + action + "-" + name + "']";
         WebElement itemElem = getDriver().findElement(By.xpath(xpath));
         itemElem.click();
     }
@@ -70,6 +69,34 @@ public class InventoryPage extends AbstactPage{
         }
         return itemExists;
     }
+
+    public void addRandomProducts(int numProductAdd){
+
+        ArrayList<Integer> selectedItems = new ArrayList<>();
+        while (selectedItems.size() < numProductAdd) {
+            int index = new Random().nextInt(inventoryList.size());
+            if (!selectedItems.contains(index)) {
+                selectedItems.add(index);
+            }
+        }
+
+        for (int i = 0 ; i < selectedItems.size() ; i++) {
+            WebElement productElement = inventoryList.get(selectedItems.get(i));
+            productElement.findElement(By.xpath(".//button[@class='btn btn_primary btn_small btn_inventory']"))
+                    .click();
+        }
+    }
+
+
+    public void sortInventory(String sortOption) {
+
+
+        //options.selectByIndex(2);
+        options.selectByVisibleText(sortOption);
+        //options.selectByValue("hilo");
+
+    }
+
 
     public int numberItemList() {
         int totalItems = inventoryList.size();
