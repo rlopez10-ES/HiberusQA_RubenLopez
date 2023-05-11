@@ -1,5 +1,9 @@
 package Selenium.EJ_POM.TestSuites;
 
+import Selenium.EJ_POM.Pages.CartPage;
+import Selenium.EJ_POM.Pages.InventoryPage;
+import Selenium.EJ_POM.Pages.LoginPage;
+import Selenium.EJ_POM.Pages.PagesFactory;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Assert;
@@ -16,45 +20,37 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class Carrito {
 
     WebDriver driver;
-    WebDriverWait wait;
-    Select selectOption;
 
-    String url = "https://www.saucedemo.com/";
-    String username = "standard_user";
-    String usernameBad = "standard";
-    String password = "secret_sauce";
-    String expectedUrl = "https://www.saucedemo.com/inventory.html";
+    public LoginPage loginPage;
+    public InventoryPage inventoryPage;
+    public CartPage cartPage;
 
     @Before
     public void setUp() {
         WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
-        driver = new ChromeDriver(options);
 
+        driver = new ChromeDriver();
         driver.manage().deleteAllCookies();
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.manage().window().maximize();
+        PagesFactory.start(driver);
 
-        wait = new WebDriverWait(driver, 5);
+        driver.get(LoginPage.PAGE_URL);
 
+        PagesFactory pagesFactory = PagesFactory.getInstance();
+        loginPage = pagesFactory.getLoginPage();
+        inventoryPage = pagesFactory.getInventoryPage();
+        cartPage = pagesFactory.getCartPage();
 
-        //PASO 1: IR A LA PAGINA WEB
-        driver.get(url);
-
-        //PASO 2: ESCRIBIR EL USERNAME
-        driver.findElement(By.xpath("//input[@data-test='username']"))
-                .sendKeys(username);
-
-        //PASO 3: ESCRIBIR LA CONTRASEÑA
-        driver.findElement(By.xpath("//input[@data-test='password']"))
-                .sendKeys(password);
-
-        //PASO 4: PULSAR EL BOTON LOGIN
-        driver.findElement(By.xpath("//input[@data-test='login-button']"))
-                .click();
+        //HACEMOS EL LOGIN
+        loginPage.enterUsername("standard_user");
+        loginPage.enterPassword("secret_sauce");
+        loginPage.clickLogin();
     }
 /*
     Eliminar producto desde el carrito:
@@ -66,41 +62,14 @@ public class Carrito {
     @Test
     public void deleteFromShoppingCart() {
 
-        List<WebElement> itemsList = driver.findElements(By.xpath("//div[@class='inventory_item']"));
+        int expectedItems = 2;
+        inventoryPage.addRandomProducts(2);
 
-        //PASO 5: AGREGAMOS 3 PRODUCTOS AL AZAR
+        inventoryPage.clickShoppingCart();
 
-        //SELECCIONAMOS 3 PRODUCTOS SIN REPETICION
-        ArrayList<Integer> selectedItems = new ArrayList<>();
-        while (selectedItems.size() < 3) {
-            int index = new Random().nextInt(itemsList.size());
-            if (!selectedItems.contains(index)) {
-                selectedItems.add(index);
-            }
-        }
+        cartPage.clickRemove(1);
 
-        //AÑADIMOS LOS PRODUCTOS AL CARRITO
-        for (int i = 0; i < selectedItems.size(); i++) {
-            WebElement productElement = itemsList.get(selectedItems.get(i));
-            WebElement addToCartButton = productElement.findElement(By.xpath("//button[text()='Add to cart']"));
-            addToCartButton.click();
-        }
-
-        //PASO 6: VAMOS AL CARRITO
-        driver.findElement(By.xpath("//div[@class='shopping_cart_container']"))
-                .click();
-
-        //PASO 7: ELIMINAMOS UNO DE LOS PRODUCTOS AÑADIDOS
-
-        Random rand = new Random();
-
-        List<WebElement> removeButton = driver.findElements(By.xpath("//button[@class='btn btn_secondary btn_small cart_button']"));
-        int removeProduct = rand.nextInt(removeButton.size());
-
-        removeButton.get(removeProduct).click();
-
-        List<WebElement> actualItems = driver.findElements(By.xpath("//div[@class='cart_item']"));
-        Assert.assertEquals("No se elimino el producto", removeButton.size() - 1, actualItems.size());
+        Assert.assertEquals("No se elimino el producto", expectedItems - 1, cartPage.getItemCount());
     }
 
 

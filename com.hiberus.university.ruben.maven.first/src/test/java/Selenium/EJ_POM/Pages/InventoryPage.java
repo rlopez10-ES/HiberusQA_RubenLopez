@@ -20,7 +20,7 @@ public class InventoryPage extends AbstactPage{
     private WebElement openMenu;
 
     @FindBy(id = "shopping_cart_container")
-    private WebElement shoppingCartElement;
+    private WebElement shoppingCart;
 
     @FindBy(xpath = "//a[@class='shopping_cart_link']")
     private WebElement shoppingCartNumber;
@@ -164,18 +164,16 @@ public class InventoryPage extends AbstactPage{
 
         return totalCartItems;
     }
-/*
-    public void remove(){
-        log.info("Removing in ....");
+
+    public void clickShoppingCart() {
+        log.info("Logging in ....");
 
         try {
-            .click();
+            shoppingCart.click();
         } catch (TimeoutException ex) {
-            log.info("Timeout clicking Remove : " + ex.getClass().getSimpleName());
+            log.info("Timeout clicking the shopping cart : " + ex.getClass().getSimpleName());
         }
     }
-
- */
 }
 
 
