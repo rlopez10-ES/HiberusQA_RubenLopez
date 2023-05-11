@@ -9,9 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Slf4j
 public class InventoryPage extends AbstactPage{
@@ -33,8 +31,11 @@ public class InventoryPage extends AbstactPage{
     @FindBy(xpath = "//div[@class='inventory_item_name']")
     private List<WebElement> inventoryNameList;
 
-    @FindBy(xpath = "//select[@data-test='product_sort_container']/option")
-    private Select options;
+    @FindBy(xpath = "//div[@class='inventory_item_price']")
+    private List<WebElement> inventoryPriceList;
+
+    @FindBy(xpath = "//select[@data-test='product_sort_container']")
+    private WebElement options;
 
     @FindBy(xpath = "//a[@id='logout_sidebar_link']")
     private WebElement logoutButton;
@@ -87,14 +88,68 @@ public class InventoryPage extends AbstactPage{
         }
     }
 
+    public void sortInventory(String sortOption){
 
-    public void sortInventory(String sortOption) {
+        Select selectOption = new Select(options);
+        //selectOption.selectByVisibleText(sortOption);
+        //selectOption.selectByIndex(2);
+        selectOption.selectByValue(sortOption);
+    }
+
+    public List<WebElement> orderZtoA() {
 
 
-        //options.selectByIndex(2);
-        options.selectByVisibleText(sortOption);
-        //options.selectByValue("hilo");
+        //CREAMOS OTRA LISTA COGIENDO LOS ELEMENTOS ACTUALES DE LA PAGINA TRAS APLICAR EL FILTRO
+        List<WebElement> actualList = new ArrayList<>(inventoryNameList);
 
+        //ORDENAMOS LA LISTA REALMENTE COGIENDO LA LISTA ORIGINAL
+        List<WebElement> orderList = new ArrayList<>(inventoryNameList);
+        orderList.sort((e1, e2) -> {
+            String nombre1 = e1.getText().toLowerCase();
+            String nombre2 = e2.getText().toLowerCase();
+
+            return nombre2.compareTo(nombre1);
+        });
+
+        ArrayList listas = new ArrayList();
+
+        listas.add(actualList);
+        listas.add(orderList);
+
+        return listas;
+    }
+
+    public List<WebElement> orderByPrice(String tipoSort) {
+
+        //CREAMOS OTRA LISTA COGIENDO LOS ELEMENTOS ACTUALES DE LA PAGINA TRAS APLICAR EL FILTRO
+        List<WebElement> actualList = new ArrayList<>(inventoryPriceList);
+
+        //ORDENAMOS LA LISTA REALMENTE COGIENDO LA LISTA ORIGINAL
+        List<WebElement> orderList = new ArrayList<>(inventoryPriceList);
+        Collections.sort(orderList, new Comparator<WebElement>() {
+            @Override
+            public int compare(WebElement e1, WebElement e2) {
+                String precio1 = e1.getText().substring(1);
+                String precio2 = e2.getText().substring(1);
+
+                double precioDouble1 = Double.parseDouble(precio1);
+                double precioDouble2 = Double.parseDouble(precio2);
+
+                int prueba = 0;
+                if(tipoSort.equals("LowToHigh")){
+                     prueba = Double.compare(precioDouble1, precioDouble2);
+                } else if(tipoSort.equals("HighToLow")){
+                     prueba = Double.compare(precioDouble2, precioDouble1);
+                }
+                return prueba;
+            }
+        });
+
+        ArrayList listas = new ArrayList();
+        listas.add(actualList);
+        listas.add(orderList);
+
+        return listas;
     }
 
 
@@ -124,64 +179,3 @@ public class InventoryPage extends AbstactPage{
 }
 
 
-/*
-import java.util.List;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
-
-public class InventoryPage extends AbstractPage {
-  public static final String PAGE_URL = "https://www.saucedemo.com/inventory.html";
-
-  @FindBy(css = "#inventory_container")
-  private WebElement inventoryContainer;
-
-  @FindBy(xpath = "//div[@class='inventory_item_name']")
-  private List<WebElement> inventoryNameList;
-
-  @FindBy(xpath = "//div[@class='inventory_item_price']")
-  private List<WebElement> inventoryPriceList;
-
-  @FindBy(xpath = "//select[@data-test='product_sort_container']")
-  private Select sortSelect;
-
-  public InventoryPage(WebDriver driver) {
-    super(driver);
-    PageFactory.initElements(driver, this);
-  }
-
-  @Override
-  public WebElement getPageLoadedTestElement() {
-    return inventoryContainer;
-  }
-
-  public void selectOption(String option) {
-    sortSelect.selectByValue(option);
-  }
-
-  public boolean existProductInInventoryList(String itemName) {
-    boolean isProductPresent = false;
-    for (WebElement webElement : inventoryNameList) {
-      if (webElement.getText().equals(itemName)) {
-        isProductPresent = true;
-        break;
-      }
-    }
-    return isProductPresent;
-  }
-
-  public List<WebElement> getInventoryPriceList() {
-    return inventoryPriceList;
-  }
-
-  public void addItemToCartByName(String itemName) {
-    String name = itemName.replace(" ", "-").toLowerCase();
-    String xpath = "//button['add-to-cart-" + name + "]";
-    WebElement itemElem = getDriver().findElement(By.xpath(xpath));
-    itemElem.click();
-  }
-}
- */
