@@ -1,5 +1,6 @@
 package Selenium.EJ_POM.TestSuites;
 
+import Selenium.EJ_POM.Pages.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Assert;
@@ -17,46 +18,42 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class Checkout {
 
     WebDriver driver;
-    WebDriverWait wait;
-    Select selectOption;
 
-    String url = "https://www.saucedemo.com/";
-    String username = "standard_user";
-    String usernameBad = "standard";
-    String password = "secret_sauce";
-    String expectedUrl = "https://www.saucedemo.com/inventory.html";
+    String []action = {"add-to-cart", "remove"};
+
+
+    public LoginPage loginPage;
+    public InventoryPage inventoryPage;
+    public CheckoutStepOnePage checkoutStepOnePage;
+    public CheckoutStepSecondPage checkoutStepSecondPage;
+
 
 
     @Before
     public void setUp() {
         WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
-        driver = new ChromeDriver(options);
 
+        driver = new ChromeDriver();
         driver.manage().deleteAllCookies();
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.manage().window().maximize();
+        PagesFactory.start(driver);
 
-        wait = new WebDriverWait(driver, 10);
+        driver.get(LoginPage.PAGE_URL);
 
+        PagesFactory pagesFactory = PagesFactory.getInstance();
+        loginPage = pagesFactory.getLoginPage();
+        inventoryPage = pagesFactory.getInventoryPage();
 
-        //PASO 1: IR A LA PAGINA WEB
-        driver.get(url);
-
-        //PASO 2: ESCRIBIR EL USERNAME
-        driver.findElement(By.xpath("//input[@data-test='username']"))
-                .sendKeys(username);
-
-        //PASO 3: ESCRIBIR LA CONTRASEÑA
-        driver.findElement(By.xpath("//input[@data-test='password']"))
-                .sendKeys(password);
-
-        //PASO 4: PULSAR EL BOTON LOGIN
-        driver.findElement(By.xpath("//input[@data-test='login-button']"))
-                .click();
+        //HACEMOS EL LOGIN
+        loginPage.enterUsername("standard_user");
+        loginPage.enterPassword("secret_sauce");
+        loginPage.clickLogin();
     }
 
 

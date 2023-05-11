@@ -41,8 +41,16 @@ public class PagesFactory {
     public LoginPage getLoginPage() {
         return loginPage;
     }
-
     public InventoryPage getInventoryPage() {
         return inventoryPage;
+    }
+    public CartPage getCartPage() {
+        return cartPage;
+    }
+    public CheckoutStepOnePage getCheckoutStepOnePage() {
+        return checkoutStepOnePage;
+    }
+    public CheckoutStepSecondPage getCheckoutStepSecondPage() {
+        return checkoutStepSecondPage;
     }
 }
