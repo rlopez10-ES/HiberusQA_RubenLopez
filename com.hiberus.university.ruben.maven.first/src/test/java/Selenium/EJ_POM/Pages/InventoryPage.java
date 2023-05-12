@@ -40,6 +40,8 @@ public class InventoryPage extends AbstactPage{
     @FindBy(xpath = "//a[@id='logout_sidebar_link']")
     private WebElement logoutButton;
 
+    @FindBy(xpath = "//button[@id='react-burger-menu-btn']")
+    private WebElement burgerMenu;
 
 
     InventoryPage(WebDriver driver) {
@@ -50,6 +52,17 @@ public class InventoryPage extends AbstactPage{
     @Override
     public WebElement getPageLoadedTestElement() {
         return null;
+    }
+
+    public void clickLogout(){
+        log.info("Logging out ....");
+
+        try {
+            burgerMenu.click();
+            logoutButton.click();
+        } catch (TimeoutException ex) {
+            log.info("Timeout clicking logout button : " + ex.getClass().getSimpleName());
+        }
     }
 
     public void itemAddOrRemove(String itemName, String action) {

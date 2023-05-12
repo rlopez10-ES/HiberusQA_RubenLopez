@@ -18,7 +18,7 @@
     @productExists
     Scenario Outline: Validate a product exists on the inventory page
       When the user is looking the inventory page
-      Then there should be a product named "product" "Sauce Labs Bolt T-Shirt"
+      Then there should be a product named "<product>" "Sauce Labs Bolt T-Shirt"
 
       Examples:
         | username      | password     | product                 |
@@ -36,8 +36,8 @@
 
     @validateRemoveButton
     Scenario Outline: validate remove button after adding a product
-      When the user clicks the button "Add to cart" of the product "Sauce Labs Bolt T-Shirt"
-      Then the button "Add to button" becomes "Remove"
+      When the user clicks the button "<button>" of the product "Sauce Labs Bolt T-Shirt"
+      Then the button "Add to button" becomes "<button>"
 
       Examples:
         | username      | password     | product                 | button       |
@@ -47,10 +47,10 @@
 
     @removeProduct
     Scenario Outline: remove a product after adding it and verify the shopping cart is empty
-      When the user clicks the button "Add to cart" of the product "Sauce Labs Bolt T-Shirt"
+      When the user clicks the button "<button>" of the product "<product>"
       And  the button "Add to button" becomes "Remove"
       And the user verify that the cart icon has a 1
-      And the user clicks the button "Remove" of the product "Sauce Labs Bolt T-Shirt"
+      And the user clicks the button "<button>" of the product "Sauce Labs Bolt T-Shirt"
       Then the shopping cart should be empty
 
       Examples:
@@ -60,43 +60,42 @@
 
     @addThreeProducts
     Scenario Outline: validate the shopping cart has 3 products after adding three
-      When the user clicks the button "Add to cart" of three products
+      When the user clicks the button "<button>" of three products
       Then the cart icon should have a 3, meaning three products
 
       Examples:
         | username      | password     | product                 | button       |
         | standard_user | secret_sauce | Sauce Labs Bolt T-Shirt | Add to cart  |
-        |               |              |                         | Remove       |
+
 
 
     @sortZtoA
     Scenario Outline: validate that the products are ordered Z to A after applying the filter "Name (Z to A)"
-      When the users selects the filter "Name (Z to A)"
+      When the users selects the filter "<filter>"
       Then the products should be ordered form Z to A
 
       Examples:
-        | username      | password     | product                 | button       | filter|
-        | standard_user | secret_sauce | Sauce Labs Bolt T-Shirt | Add to cart  | Name (Z to A)|
-        |               |              |                         | Remove       | |
+        | username      | password     | product                 | button      | filter        |
+        | standard_user | secret_sauce | Sauce Labs Bolt T-Shirt | Add to cart | Name (Z to A) |
+        |               |              |                         | Remove      |               |
 
     @sortByPriceLowToHigh
     Scenario Outline: validate that the products are ordered from price low to high after applying the filter "Price (Low to High)"
-      When the users selects the filter "Price (Low to High)"
+      When the users selects the filter "<filter>"
       Then the products should be ordered from price low to high
 
       Examples:
-        | username      | password     | product                 | button       | filter|
-        | standard_user | secret_sauce | Sauce Labs Bolt T-Shirt | Add to cart  | Name (Z to A)|
-        |               |              |                         | Remove       | Price (Low to High)|
+        | username      | password     | product                 | button      | filter              |
+        | standard_user | secret_sauce | Sauce Labs Bolt T-Shirt | Add to cart | Price (Low to High) |
+        |               |              |                         | Remove      |                     |
 
     @sortByPriceLowToHigh
     Scenario Outline: validate that the products are ordered from price high to low after applying the filter "Price (High to Low)"
-      When the users selects the filter "Price (High to Low)"
+      When the users selects the filter "<filter>"
       Then the products should be ordered from price high to low
 
       Examples:
-        | username      | password     | product                 | button       | filter              |
-        | standard_user | secret_sauce | Sauce Labs Bolt T-Shirt | Add to cart  | Name (Z to A)       |
-        |               |              |                         | Remove       | Price (Low to High) |
-        |               |              |                         | Remove       | Price (High to Low) |
+        | username      | password     | product                 | button      | filter              |
+        | standard_user | secret_sauce | Sauce Labs Bolt T-Shirt | Add to cart | Price (High to Low) |
+        |               |              |                         | Remove      |                     |
 

@@ -26,6 +26,9 @@ public class CartPage extends AbstactPage{
     @FindBy(className = "cart_item")
     private List<WebElement> itemList;
 
+    @FindBy(className = "inventory_item_price")
+    private List<WebElement> itemListPrice;
+
     @FindBy(id = "react-burger-menu-btn")
     private WebElement openMenu;
 
@@ -40,12 +43,23 @@ public class CartPage extends AbstactPage{
     }
 
 
+    public double sumItemTotalPrice() {
+        double total = 0.0;
+
+        for(int i = 0; i < itemListPrice.size(); i++){
+            String price = itemListPrice.get(i).getText().replace("$", "");
+            total += Double.parseDouble(price);
+        }
+
+        return total;
+    }
+
     public void clickRemove(int pos) {
         removeButton.get(pos).click();
     }
 
     public void clickCheckout() {
-        log.info("Logging in ....");
+        log.info("Checkout ....");
 
         try {
             checkOutButton.click();
@@ -55,7 +69,7 @@ public class CartPage extends AbstactPage{
     }
 
     public void clickContinueShoppingButton() {
-        log.info("Logging in ....");
+        log.info("Canceling ....");
 
         try {
             continueShoppingButton.click();

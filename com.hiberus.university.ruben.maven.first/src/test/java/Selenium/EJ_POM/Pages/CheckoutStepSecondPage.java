@@ -26,6 +26,9 @@ public class CheckoutStepSecondPage extends AbstactPage{
     @FindBy(id = "finish")
     private WebElement finishButton;
 
+    @FindBy(xpath = "//div[@class='complete-text']")
+    private WebElement finalText;
+
 
 
     CheckoutStepSecondPage(WebDriver driver) {
@@ -53,28 +56,31 @@ public class CheckoutStepSecondPage extends AbstactPage{
         log.info("Finishing in ....");
 
         try {
-            cancelButton.click();
+            finishButton.click();
         } catch (TimeoutException ex) {
             log.info("Timeout clicking Finish : " + ex.getClass().getSimpleName());
         }
     }
 
+    public String getFinalText() {
+        return finalText.getText();
+    }
 
-    public double getItemTotal(WebElement itemTotalElement) {
-        String itemTotalText = itemTotalElement.getText().substring(1);
-        Double itemTotal = Double.parseDouble(itemTotalText);
+    public double getItemTotal() {
+        String itemTotalText[] = itemTotalElement.getText().split("\\$");
+        Double itemTotal = Double.parseDouble(itemTotalText[1]);
 
         return itemTotal;
     }
 
-    public double getTax(WebElement taxElement) {
+    public double getTax() {
         String taxText = taxElement.getText().substring(1);
         Double tax = Double.parseDouble(taxText);
 
         return tax;
     }
 
-    public double getTotal(WebElement totalElement) {
+    public double getTotal() {
         String totalText = totalElement.getText().substring(1);
         Double total = Double.parseDouble(totalText);
 

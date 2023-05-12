@@ -19,7 +19,6 @@ import java.util.concurrent.TimeUnit;
 public class Login {
 
     WebDriver driver;
-    WebDriverWait wait;
 
     public LoginPage loginPage;
 

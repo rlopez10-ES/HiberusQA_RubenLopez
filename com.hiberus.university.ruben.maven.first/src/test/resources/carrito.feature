@@ -2,7 +2,7 @@
 Feature: ShoppingCart test suite
   Background: Navigate to the home page
     Given the user is on the home page
-    And the user provide the username "username" and password "password"
+    And the user provide the username "<username>" and password "<password>"
     And the user clicks the login button
     And is into the inventory page
     And add two products
@@ -12,7 +12,7 @@ Feature: ShoppingCart test suite
 
   @validateRemoveProductFromShoppingCart
   Scenario Outline: Remove a product and validate is removed after adding 2
-    When the user clicks the button "Remove" of one product
+    When the user clicks the button "<button>" of one product
     Then there should be one product on the shopping cart
 
     Examples:
