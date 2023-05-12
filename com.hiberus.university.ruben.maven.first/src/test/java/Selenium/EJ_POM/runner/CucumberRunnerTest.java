@@ -6,8 +6,9 @@ import org.junit.runner.*;
 @RunWith(Cucumber.class)
 @CucumberOptions(
     plugin = {"pretty"},
-    glue = {"Selenium/EJ_POM/Stepdefs", "Selenium/EJ_POM/support"},
-    features = {"src/test/resources"}
+    glue = {"com/hiberus/university/ruben/maven/first/src/test/java/Selenium/EJ_POM/Stepdefs",
+            "com/hiberus/university/ruben/maven/first/src/test/java/Selenium/EJ_POM/support"},
+    features = {"com/hiberus/university/ruben/maven/first/src/test/resources"}
 )
 public class CucumberRunnerTest {
 }
