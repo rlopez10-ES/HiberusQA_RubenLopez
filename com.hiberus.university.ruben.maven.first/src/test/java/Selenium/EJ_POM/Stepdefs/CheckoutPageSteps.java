@@ -16,36 +16,10 @@ public class CheckoutPageSteps {
     CheckoutStepOnePage checkoutStepOnePage = PagesFactory.getInstance().getCheckoutStepOnePage();
     CheckoutStepSecondPage checkoutStepSecondPage = PagesFactory.getInstance().getCheckoutStepSecondPage();
 
-    @Given("the user is on the home page")
-    public void theUserIsOnTheHomePage() {
-        log.info("The user is on the home page");
-        loginPage.navigateTo(LoginPage.PAGE_URL);
-    }
-
-    @And("the user provides the username {string} and password {string}")
-    public void theUserProvidesTheUsernameAndPassword(String username, String password) {
-        loginPage.enterUsername(username);
-        loginPage.enterPassword(password);
-    }
-
-    @When("the user clicks the login button")
-    public void theUserClicksTheLoginButton() {
-        loginPage.clickLogin();
-    }
-
-    @Then("the user is logged successfully and is into the inventory page")
-    public void theUserIsLoggedSuccessfullyAndIsIntoTheInventoryPage() {
-        Assert.assertEquals("the URL is not the inventory Page", InventoryPage.PAGE_URL, PagesFactory.getInstance().getDriver());
-    }
 
     @When("the user adds {int} products")
     public void theUserAddsProducts(int num) {
         inventoryPage.addRandomProducts(num);
-    }
-    
-    @And("clicks the shopping cart icon")
-    public void clicksTheShoppingCartIcon() {
-        inventoryPage.clickShoppingCart();
     }
 
     @And("clicks the button Checkout")

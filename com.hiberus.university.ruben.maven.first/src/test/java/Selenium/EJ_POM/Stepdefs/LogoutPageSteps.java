@@ -16,27 +16,6 @@ public class LogoutPageSteps {
     LoginPage loginPage = PagesFactory.getInstance().getLoginPage();
     InventoryPage inventoryPage = PagesFactory.getInstance().getInventoryPage();
 
-    @Given("the user is on the home page")
-    public void theUserIsOnTheHomePage() {
-        log.info("The user is on the home page");
-        loginPage.navigateTo(LoginPage.PAGE_URL);
-    }
-
-    @And("the user provides the username {string} and password {string}")
-    public void theUserProvidesTheUsernameAndPassword(String username, String password) {
-        loginPage.enterUsername(username);
-        loginPage.enterPassword(password);
-    }
-
-    @And("the user clicks the login button")
-    public void theUserClicksTheLoginButton() {
-        loginPage.clickLogin();
-    }
-
-    @And("the user is logged successfully and is into the inventory page")
-    public void theUserIsLoggedSuccessfullyAndIsIntoTheInventoryPage() {
-        Assert.assertEquals("the URL is not the inventory Page", InventoryPage.PAGE_URL, PagesFactory.getInstance().getDriver() );
-    }
 
     @When("the user logout")
     public void theUserLogout() {
