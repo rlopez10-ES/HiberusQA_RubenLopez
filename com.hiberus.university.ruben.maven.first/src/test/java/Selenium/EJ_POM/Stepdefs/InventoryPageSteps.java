@@ -24,7 +24,7 @@ public class InventoryPageSteps {
 
     @And("is into the inventory page")
     public void isIntoTheInventoryPage() {
-        Assert.assertEquals("the URL is not the inventory Page", InventoryPage.PAGE_URL, PagesFactory.getInstance().getDriver() );
+        Assert.assertEquals("the URL is not the inventory Page", InventoryPage.PAGE_URL, PagesFactory.getInstance().getDriver().getCurrentUrl() );
     }
 
     @When("the user counts the products")
@@ -49,13 +49,9 @@ public class InventoryPageSteps {
 
     @When("the user clicks the button {string} of the product {string}")
     public void theUserClicksTheButtonOfTheProduct(String button, String productName) {
-        inventoryPage.itemAddOrRemove(button, productName);
+        inventoryPage.itemAddOrRemove(productName, button);
     }
 
-    @Then("the cart icon will have {int} product added")
-    public void theCartIconWillHaveProductAdded(int num) {
-        Assert.assertEquals(num, inventoryPage.numberProductsCart());
-    }
 
 
     @Then("the shopping cart should be empty")
@@ -63,15 +59,9 @@ public class InventoryPageSteps {
         Assert.assertEquals("El carrito no esta vacio" , "", inventoryPage.numberProductsCart());
     }
 
-    @When("the user clicks the button {string} of {int} products")
-    public void theUserClicksTheButtonOfProducts(String button, int num) {
-        inventoryPage.addRandomProducts(num);
-    }
 
-    @Then("the cart icon should have a {int}, meaning three products")
-    public void theCartIconShouldHaveAMeaningThreeProducts(int num) {
-        Assert.assertEquals("No hay tres productos en el carrito", String.valueOf(num), inventoryPage.numberProductsCart());
-    }
+
+
 
     @When("the users selects the filter {string}")
     public void theUsersSelectsTheFilter(String filterOption) {
@@ -94,5 +84,16 @@ public class InventoryPageSteps {
     public void theProductsShouldBeOrderedFromPriceHighToLow() {
         ArrayList listas = (ArrayList) inventoryPage.orderByPrice("HighToLow");
         Assert.assertEquals("No se ordeno la lista", listas.get(0), listas.get(1));
+    }
+
+
+    @When("the user clicks the button {string} of {int} products")
+    public void theUserClicksTheButtonOfProducts(String button, int num) {
+        inventoryPage.addRandomProducts(num);
+    }
+
+    @Then("the cart icon will have {string} product added")
+    public void theCartIconWillHaveProductAdded(String num) {
+        Assert.assertEquals("No hay el num de productos que deberia haber", num, inventoryPage.numberProductsCart());
     }
 }

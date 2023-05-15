@@ -1,6 +1,9 @@
 package Selenium.EJ_POM.Stepdefs;
 
-import Selenium.EJ_POM.Pages.*;
+
+import Selenium.EJ_POM.Pages.InventoryPage;
+import Selenium.EJ_POM.Pages.LoginPage;
+import Selenium.EJ_POM.Pages.PagesFactory;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -33,7 +36,7 @@ public class LoginPageSteps {
 
     @Then("the user is logged successfully and is into the inventory page")
     public void theUserIsLoggedSuccessfullyAndIsIntoTheInventoryPage() {
-        Assert.assertEquals("the URL is not the inventory Page", InventoryPage.PAGE_URL, PagesFactory.getInstance().getDriver() );
+        Assert.assertEquals("the URL is not the inventory Page", InventoryPage.PAGE_URL, PagesFactory.getInstance().getDriver().getCurrentUrl() );
     }
 
     @Then("the user should be shown an invalid message")

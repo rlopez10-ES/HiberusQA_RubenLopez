@@ -26,7 +26,7 @@ public class CarritoPageSteps {
 
     @And("is into the shopping cart")
     public void isIntoTheShoppingCart() {
-        Assert.assertEquals("No es la pagina del carrito", InventoryPage.PAGE_URL, PagesFactory.getInstance().getDriver() );
+        Assert.assertEquals("No es la pagina del carrito", CartPage.PAGE_URL, PagesFactory.getInstance().getDriver().getCurrentUrl() );
     }
 
     @When("the user clicks the button {string} of one product")
@@ -34,8 +34,8 @@ public class CarritoPageSteps {
         cartPage.clickRemove(0);
     }
 
-    @Then("there should be {int} product on the shopping cart")
-    public void thereShouldBeProductOnTheShoppingCart(int num) {
-        Assert.assertEquals("No se elimino el producto", "1", inventoryPage.numberProductsCart());
+    @Then("there should be {string} product on the shopping cart")
+    public void thereShouldBeProductOnTheShoppingCart(String num) {
+        Assert.assertEquals("No se elimino el producto", num, inventoryPage.numberProductsCart());
     }
 }

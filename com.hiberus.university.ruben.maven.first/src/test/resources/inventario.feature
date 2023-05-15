@@ -2,7 +2,7 @@
   Feature: Inventory test suite
     Background: Navigate to the home page
       Given the user is on the home page
-      And the user provide the username "<username>" and password "<password>"
+      And the user provide the username "standard_user" and password "secret_sauce"
       And the user clicks the login button
       And is into the inventory page
 
@@ -21,39 +21,38 @@
       Then there should be a product named product "Sauce Labs Bolt T-Shirt"
 
       Examples:
-        | username      | password     | product                 |
-        | standard_user | secret_sauce | Sauce Labs Bolt T-Shirt |
+        | product                 |
+        | Sauce Labs Bolt T-Shirt |
 
     @addingProduct
     Scenario Outline: add a product to the shopping cart
       When the user clicks the button "<button>" of the product "<product>"
-      Then the cart icon will have 1 product added
+      Then the cart icon will have "1" product added
 
       Examples:
-        | username      | password     | product                 | button       |
-        | standard_user | secret_sauce | Sauce Labs Bolt T-Shirt | Add to cart  |
+        | product                 | button      |
+        | Sauce Labs Bolt T-Shirt | add-to-cart |
 
 
     @removeProduct
     Scenario Outline: remove a product after adding it and verify the shopping cart is empty
       When the user clicks the button "<button>" of the product "<product>"
-      And the cart icon will have 1 product added
-      And the user clicks the button "<button>" of the product "<product>"
+      And the cart icon will have "1" product added
+      And the user clicks the button "remove" of the product "<product>"
       Then the shopping cart should be empty
 
       Examples:
         | product                 | button      |
-        | Sauce Labs Bolt T-Shirt | Add to cart |
-        | Sauce Labs Bolt T-Shirt | Remove      |
+        | Sauce Labs Bolt T-Shirt | add-to-cart |
 
     @addThreeProducts
     Scenario Outline: validate the shopping cart has 3 products after adding three
       When the user clicks the button "<button>" of 3 products
-      Then the cart icon should have a 3, meaning three products
+      Then the cart icon will have "3" product added
 
       Examples:
         | button      |
-        | Add to cart |
+        | add-to-cart |
 
 
 

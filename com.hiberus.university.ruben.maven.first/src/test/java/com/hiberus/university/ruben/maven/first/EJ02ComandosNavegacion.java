@@ -1,7 +1,6 @@
 package com.hiberus.university.ruben.maven.first;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import javafx.scene.layout.Background;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

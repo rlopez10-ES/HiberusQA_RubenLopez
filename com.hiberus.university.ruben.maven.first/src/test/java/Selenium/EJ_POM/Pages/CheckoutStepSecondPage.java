@@ -17,7 +17,7 @@ public class CheckoutStepSecondPage extends AbstactPage{
     @FindBy(className = "summary_tax_label")
     private WebElement taxElement;
 
-    @FindBy(className = "summary_info_label summary_total_label")
+    @FindBy(className = "summary_info_labelsummary_total_label")
     private WebElement totalElement;
 
     @FindBy(id = "cancel")
@@ -86,6 +86,8 @@ public class CheckoutStepSecondPage extends AbstactPage{
 
         return total;
     }
+
+
 
 
 }

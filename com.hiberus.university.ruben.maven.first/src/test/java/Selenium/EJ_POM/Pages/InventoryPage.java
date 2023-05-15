@@ -59,8 +59,9 @@ public class InventoryPage extends AbstactPage{
 
         try {
             burgerMenu.click();
+            Thread.sleep(100);
             logoutButton.click();
-        } catch (TimeoutException ex) {
+        } catch (TimeoutException | InterruptedException ex) {
             log.info("Timeout clicking logout button : " + ex.getClass().getSimpleName());
         }
     }
