@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.concurrent.TimeoutException;
 
 @Slf4j
@@ -18,7 +19,7 @@ public abstract class AbstactPage {
 
     AbstactPage(WebDriver driver) {
         this.driver = driver;
-        wait = new WebDriverWait(driver, 10, 500);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5), Duration.ofSeconds(7));
     }
 
     protected WebDriver getDriver() {

@@ -6,6 +6,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.support.ui.*;
 
+import java.time.Duration;
 import java.util.*;
 
 public class Inventario {
@@ -29,7 +30,7 @@ public class Inventario {
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
 
-        wait = new WebDriverWait(driver, 5);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5), Duration.ofSeconds(7));
 
 
 

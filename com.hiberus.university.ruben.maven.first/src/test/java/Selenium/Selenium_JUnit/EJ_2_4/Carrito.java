@@ -13,6 +13,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -38,7 +39,7 @@ public class Carrito {
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
 
-        wait = new WebDriverWait(driver, 5);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5), Duration.ofSeconds(7));
 
 
         //PASO 1: IR A LA PAGINA WEB

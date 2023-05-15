@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
 
+import java.time.Duration;
 import java.time.LocalDate;
 
 public class TestVueling {
@@ -17,7 +18,7 @@ public class TestVueling {
         ChromeOptions chromeOptions = new ChromeOptions();
 
         driver = new ChromeDriver(chromeOptions);
-        WebDriverWait wait = new WebDriverWait(driver, 5); //LE DAMOS UN TIEMPO DE ESPERA PARA QUE SALGAN LOS ELEMENTOS
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5), Duration.ofSeconds(7)); //LE DAMOS UN TIEMPO DE ESPERA PARA QUE SALGAN LOS ELEMENTOS
         driver.manage().window().maximize();
 
         //ABRIMOS LA PAGINA WEB

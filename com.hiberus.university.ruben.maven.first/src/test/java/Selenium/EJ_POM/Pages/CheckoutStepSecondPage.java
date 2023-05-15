@@ -62,8 +62,8 @@ public class CheckoutStepSecondPage extends AbstactPage{
         }
     }
 
-    public String getFinalText() {
-        return finalText.getText();
+    public boolean getFinalText() {
+        return finalText.isDisplayed();
     }
 
     public double getItemTotal() {

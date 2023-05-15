@@ -14,6 +14,8 @@ import java.util.List;
 @Slf4j
 public class CartPage extends AbstactPage{
 
+    public static final String PAGE_URL = "https://www.saucedemo.com/cart.html";
+
     @FindBy(xpath = "//button[@class='btn btn_secondary btn_small cart_button']")
     private List<WebElement> removeButton;
 
@@ -75,6 +77,16 @@ public class CartPage extends AbstactPage{
             continueShoppingButton.click();
         } catch (TimeoutException ex) {
             log.info("Timeout clicking Continue Shopping : " + ex.getClass().getSimpleName());
+        }
+    }
+
+    public void clickCheckoutButton() {
+        log.info("Checking out ....");
+
+        try {
+            checkOutButton.click();
+        } catch (TimeoutException ex) {
+            log.info("Timeout clicking checkout : " + ex.getClass().getSimpleName());
         }
     }
 

@@ -7,6 +7,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 public class VisibilidadRemove {
     private static String url = "https://www.saucedemo.com/" ;
     static WebDriver driver;
@@ -16,7 +18,7 @@ public class VisibilidadRemove {
         ChromeOptions chromeOptions = new ChromeOptions();
 
         driver = new ChromeDriver(chromeOptions);
-        WebDriverWait wait = new WebDriverWait(driver, 5); //LE DAMOS UN TIEMPO DE ESPERA PARA QUE SALGAN LOS ELEMENTOS
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5), Duration.ofSeconds(7)); //LE DAMOS UN TIEMPO DE ESPERA PARA QUE SALGAN LOS ELEMENTOS
         driver.manage().window().maximize();
 
         //ABRIMOS LA PAGINA WEB

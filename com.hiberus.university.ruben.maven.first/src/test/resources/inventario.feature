@@ -8,7 +8,7 @@
 
     @validateSixProducts
     Scenario Outline: Validate there are six products on the inventory page
-      When the user is counts the products
+      When the user counts the products
       Then there should be 6 products
 
       Examples:
@@ -42,49 +42,48 @@
       Then the shopping cart should be empty
 
       Examples:
-        | username      | password     | product                 | button      |
-        | standard_user | secret_sauce | Sauce Labs Bolt T-Shirt | Add to cart |
-        |               |              | Sauce Labs Bolt T-Shirt | Remove      |
+        | product                 | button      |
+        | Sauce Labs Bolt T-Shirt | Add to cart |
+        | Sauce Labs Bolt T-Shirt | Remove      |
 
     @addThreeProducts
     Scenario Outline: validate the shopping cart has 3 products after adding three
-      When the user clicks the button "Add to cart" of three products
+      When the user clicks the button "<button>" of 3 products
       Then the cart icon should have a 3, meaning three products
 
       Examples:
-        | username      | password     | product                 | button       |
-        | standard_user | secret_sauce | Sauce Labs Bolt T-Shirt | Add to cart  |
-        |               |              |                         | Remove       |
+        | button      |
+        | Add to cart |
+
 
 
     @sortZtoA
     Scenario Outline: validate that the products are ordered Z to A after applying the filter "Name (Z to A)"
-      When the users selects the filter "Name (Z to A)"
+      When the users selects the filter "<filter>"
       Then the products should be ordered form Z to A
 
       Examples:
-        | username      | password     | product                 | button       | filter|
-        | standard_user | secret_sauce | Sauce Labs Bolt T-Shirt | Add to cart  | Name (Z to A)|
-        |               |              |                         | Remove       | |
+        | filter |
+        | za     |
+
 
     @sortByPriceLowToHigh
     Scenario Outline: validate that the products are ordered from price low to high after applying the filter "Price (Low to High)"
-      When the users selects the filter "Price (Low to High)"
+      When the users selects the filter "<filter>"
       Then the products should be ordered from price low to high
 
       Examples:
-        | username      | password     | product                 | button       | filter|
-        | standard_user | secret_sauce | Sauce Labs Bolt T-Shirt | Add to cart  | Name (Z to A)|
-        |               |              |                         | Remove       | Price (Low to High)|
+        | filter |
+        | lohi   |
+
 
     @sortByPriceLowToHigh
     Scenario Outline: validate that the products are ordered from price high to low after applying the filter "Price (High to Low)"
-      When the users selects the filter "Price (High to Low)"
+      When the users selects the filter "<filter>"
       Then the products should be ordered from price high to low
 
       Examples:
-        | username      | password     | product                 | button       | filter              |
-        | standard_user | secret_sauce | Sauce Labs Bolt T-Shirt | Add to cart  | Name (Z to A)       |
-        |               |              |                         | Remove       | Price (Low to High) |
-        |               |              |                         | Remove       | Price (High to Low) |
+        | filter |
+        | hilo   |
+
 
