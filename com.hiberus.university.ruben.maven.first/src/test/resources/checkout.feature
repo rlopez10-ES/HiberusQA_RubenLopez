@@ -12,7 +12,7 @@ Feature: Chekout test suite
     When the user adds 3 products
     And clicks the shopping cart icon
     And clicks the button Checkout
-    And the user prodives the Firts Name "<firstName>", Last Name "<lastName>" and Postal Code "<zipCode>"
+    And the user provides the Firsts Name "<firstName>", Last Name "<lastName>" and Postal Code "<zipCode>"
     And clicks the button Continue
     Then the item total should be the sum of the selected products
 
@@ -27,7 +27,7 @@ Feature: Chekout test suite
     When the user adds 1 product
     And clicks the shopping cart icon
     And clicks the button Checkout
-    And the user prodives the Firts Name "<firstName>", Last Name "<lastName>" and Postal Code "<zipCode>"
+    And the user provides the Firsts Name "<firstName>", Last Name "<lastName>" and Postal Code "<zipCode>"
     And clicks the button Continue
     And clicks the button Finish
     Then the order should be made and a message should be displayed

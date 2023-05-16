@@ -12,11 +12,11 @@ import org.junit.runner.RunWith;
             "pretty"
     },
     glue = {
-            "com.hiberus.university.ruben.maven.first/src/test/java/Selenium/EJ_POM/Stepdefs",
-            "com.hiberus.university.ruben.maven.first/src/test/java/Selenium/EJ_POM/support"
+            "test/java/Selenium/EJ_POM/Stepdefs",
+            "test/java/Selenium/EJ_POM/support"
     },
     features = {
-            "com.hiberus.university.ruben.maven.first/src/test/resources"
+            "src/test/resources"
     }
 )
 public class CucumberRunnerTest {

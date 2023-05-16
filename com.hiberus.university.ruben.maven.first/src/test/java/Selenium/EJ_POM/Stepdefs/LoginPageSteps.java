@@ -14,8 +14,8 @@ import org.junit.Assert;
 @Slf4j
 public class LoginPageSteps {
 
-    //PagesFactory pagesFactory = PagesFactory.getInstance();
-    LoginPage loginPage = PagesFactory.getInstance().getLoginPage();
+    PagesFactory pagesFactory = PagesFactory.getInstance();
+    LoginPage loginPage = pagesFactory.getLoginPage();
 
     @Given("the user is on the home page")
     public void theUserIsOnTheHomePage() {

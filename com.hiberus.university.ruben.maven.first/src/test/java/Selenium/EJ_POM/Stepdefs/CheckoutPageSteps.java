@@ -27,13 +27,12 @@ public class CheckoutPageSteps {
         cartPage.clickCheckoutButton();
     }
 
-    @And("the user prodives the Firts Name {string}, Last Name {string} and Postal Code {string}")
-    public void theUserProdivesTheFirtsNameLastNameAndPostalCode(String firstName, String lastName, String zipCode) {
+    @And("the user provides the Firsts Name {string}, Last Name {string} and Postal Code {string}")
+    public void theUserProvidesTheFirstsNameLastNameAndPostalCode(String firstName, String lastName, String zipCode) {
         checkoutStepOnePage.enterFirstName(firstName);
         checkoutStepOnePage.enterLastName(lastName);
         checkoutStepOnePage.enterPostalCode(zipCode);
     }
-
     @And("clicks the button Continue")
     public void clicksTheButtonContinue() {
         checkoutStepOnePage.clickContinue();
@@ -60,4 +59,7 @@ public class CheckoutPageSteps {
     public void theOrderShouldBeMadeAndAMessageShouldBeDisplayed() {
         Assert.assertTrue("No se mostro el mensaje", checkoutStepSecondPage.getFinalText());
     }
+
+
+
 }

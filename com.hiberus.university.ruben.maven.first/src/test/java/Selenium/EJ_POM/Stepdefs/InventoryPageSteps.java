@@ -37,14 +37,14 @@ public class InventoryPageSteps {
         Assert.assertEquals("No hay seis productos", numItems, theUserCountsTheProducts());
     }
 
-    @When("the user shearch the product {string}")
-    public boolean theUserShearchTheProduct(String productName) {
+    @When("the user search the product {string}")
+    public boolean theUserSearchTheProduct(String productName) {
         return inventoryPage.existProductInInventoryList(productName);
     }
 
     @Then("there should be a product named product {string}")
     public void thereShouldBeAProductNamedProduct(String productName) {
-        Assert.assertTrue(productName, theUserShearchTheProduct(productName));
+        Assert.assertTrue(productName, theUserSearchTheProduct(productName));
     }
 
     @When("the user clicks the button {string} of the product {string}")
@@ -96,4 +96,6 @@ public class InventoryPageSteps {
     public void theCartIconWillHaveProductAdded(String num) {
         Assert.assertEquals("No hay el num de productos que deberia haber", num, inventoryPage.numberProductsCart());
     }
+
+
 }

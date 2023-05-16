@@ -17,8 +17,10 @@ public class CheckoutStepSecondPage extends AbstactPage{
     @FindBy(className = "summary_tax_label")
     private WebElement taxElement;
 
-    @FindBy(className = "summary_info_labelsummary_total_label")
+    @FindBy(xpath = "//div[@class='summary_info_label summary_total_label']")
     private WebElement totalElement;
+
+
 
     @FindBy(id = "cancel")
     private WebElement cancelButton;
@@ -74,18 +76,20 @@ public class CheckoutStepSecondPage extends AbstactPage{
     }
 
     public double getTax() {
-        String taxText = taxElement.getText().substring(1);
-        Double tax = Double.parseDouble(taxText);
+        String taxText[] = taxElement.getText().split("\\$");
+        Double tax = Double.parseDouble(taxText[1]);
 
         return tax;
     }
 
     public double getTotal() {
-        String totalText = totalElement.getText().substring(1);
-        Double total = Double.parseDouble(totalText);
+        String totalText[] = totalElement.getText().split("\\$");
+        Double total = Double.parseDouble(totalText[1]);
 
         return total;
     }
+
+
 
 
 
