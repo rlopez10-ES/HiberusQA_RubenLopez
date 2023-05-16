@@ -8,12 +8,15 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
+    publish = true,
     plugin = {
-            "pretty"
+            "pretty",
+            "json:target/surefire-reports/cucumber.json",
+            "html:target/cucumber-html-report.html"
     },
     glue = {
-            "test/java/Selenium/EJ_POM/Stepdefs",
-            "test/java/Selenium/EJ_POM/support"
+            "Selenium/EJ_POM/Stepdefs",
+            "Selenium/EJ_POM/support"
     },
     features = {
             "src/test/resources"
