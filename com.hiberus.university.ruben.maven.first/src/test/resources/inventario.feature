@@ -13,8 +13,10 @@ Feature: Inventory test suite
     Then there should be 6 products
 
     Examples:
-      | totalItem | password     |
-      | 6         | secret_sauce |
+      | product                 |
+      | Sauce Labs Bolt T-Shirt |
+
+
 
   @productExists
   Scenario Outline: Validate a product exists on the inventory page

@@ -12,7 +12,7 @@ Feature: Login test suite
 
     Examples:
       | username      | password     |
-      | standard_user | secret_sau |
+      | standard_user | secret_sauce |
 
   @loginKO
   Scenario Outline: Verify invalid user cannot login
