@@ -18,11 +18,11 @@ import org.junit.runner.RunWith;
             "html:target/cucumber-html-report"
     },
     glue = {
-            "/stepdefs",
-            "/support"
+            "stepdefs",
+            "support"
     },
     features = {
-            "src/test/resources/features"
+            "resources/features"
     }
 )
 public class CucumberRunnerTest {
