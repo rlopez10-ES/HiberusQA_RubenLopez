@@ -34,17 +34,19 @@ public class HomePage extends AbstractPage{
 
     public void setNumAdults(int numAdults) {
 
-        String xpath = "//*[@id='hotelsearchwidget0-occupancy-customelement']/div[2]/div[1]/div/div[2]/div[2]/input[@value='" + numAdults + "']";
+        //String xpath = "//*[@id='hotelsearchwidget0-occupancy-customelement']/div[2]/div[1]/div/div[2]/div[2]/input[@value='" + numAdults + "']";
         //String box = adultsBox.
+        buttonDeleteAdult.click();
     }
 
     public boolean checkIfButtonEnable(){
         boolean isEnable;
 
-        if (buttonDeleteAdult.getText().contains("disable")) {
-            isEnable = false;
-        } else {
+
+    if (buttonDeleteAdult.isEnabled()) {
             isEnable = true;
+        } else {
+            isEnable = false;
         }
 
         return isEnable;

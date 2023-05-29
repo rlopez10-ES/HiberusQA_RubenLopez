@@ -25,3 +25,6 @@ Feature: Home test suite
     Then a warning message will appear that the user must specify the age of the child
 
   Scenario: Verify that the button of add rooms is disable after add 5 rooms and 9 people
+    When the user adds 5 rooms
+    And there are 9 people
+    Then the button of add rooms is disable

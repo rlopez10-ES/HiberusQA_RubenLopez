@@ -32,7 +32,7 @@ public class PagesFactory {
         return pagesFactory;
     }
 
-    public HomePage getLoginPage() {
+    public HomePage getHomePage() {
         return homePage;
     }
 

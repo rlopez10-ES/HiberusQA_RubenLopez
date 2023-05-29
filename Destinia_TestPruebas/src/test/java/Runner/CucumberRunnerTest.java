@@ -11,9 +11,9 @@ import org.junit.runner.RunWith;
         plugin = {
                 "pretty",
                 //"usage",
-                "json:target/surefire-reports/cucumber.json",
-                "junit:target/cucumber-reports/Cucumber.xml",
-                "html:target/cucumber-html-report"
+                //"json:target/surefire-reports/cucumber.json",
+                //"junit:target/cucumber-reports/Cucumber.xml",
+                //"html:target/cucumber-html-report"
         },
         glue = {
                 "Stepdefs",
