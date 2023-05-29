@@ -14,18 +14,21 @@ import org.junit.runner.RunWith;
             "pretty",
             //"usage",
             "json:target/surefire-reports/cucumber.json",
-            //"junit:target/cucumber-reports/Cucumber.xml",
+            "junit:target/cucumber-reports/Cucumber.xml",
             "html:target/cucumber-html-report"
     },
     glue = {
-            "/stepdefs",
-            "/support"
+            "stepdefs",
+            "support"
     },
     features = {
-            "src/test/resources/features"
+            "features"
     }
 )
 public class CucumberRunnerTest {
 }
+
+
+
 
 
