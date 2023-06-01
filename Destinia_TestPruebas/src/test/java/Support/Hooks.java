@@ -11,9 +11,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.extern.slf4j.Slf4j;
 
 
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
@@ -34,7 +32,11 @@ public class Hooks {
         chromeOptions.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(chromeOptions);
         driver.manage().window().maximize();
+
         driver.manage().deleteAllCookies();
+        //driver.findElement(By.xpath("//button[@data-qa='oil-YesButton']"))
+            //    .click();
+
         PagesFactory.start(driver);
     }
 

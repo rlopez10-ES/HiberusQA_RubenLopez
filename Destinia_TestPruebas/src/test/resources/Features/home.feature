@@ -5,7 +5,7 @@ Feature: Home test suite
     Given the user is on the home page
 
   Scenario: Verify that the delete button is disable when there is an adult
-    When the user selects 1 adult
+    When the user adds 1 adults and 0 children
     Then the delete button is disable
 
   Scenario: Verify that the add buttons of adult and child are disable when there are 9 people
@@ -17,14 +17,14 @@ Feature: Home test suite
     Then the add button of children is disable
 
   Scenario: Verify that an age box appears after add a child
-    When the user adds 1 child
+    When the user adds 2 adults and 1 children
     Then an age box will appear
 
   Scenario: Verify that a warning message appears after add a child
-    When the user adds 1 child
+    When the user adds 2 adults and 1 children
     Then a warning message will appear that the user must specify the age of the child
 
   Scenario: Verify that the button of add rooms is disable after add 5 rooms and 9 people
-    When the user adds 5 rooms
-    And there are 9 people
+    When there are 9 people
+    And the user adds 5 rooms
     Then the button of add rooms is disable
