@@ -11,7 +11,7 @@ pipeline {
         stage('Scan') {
             steps {
                 withSonarQubeEnv(installationName: "LocalSonarqube"){
-                bat "mvn -f com.hiberus.university.ruben.maven.first.pom.xml clean
+                bat "mvn -f com.hiberus.university.ruben.maven.first/pom.xml clean
             }
         }
         stage('Test') {
