@@ -1,0 +1,28 @@
+Jenkinsfile (Declarative Pipeline)
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building..'
+            }
+        }
+        stage('Scan') {
+            steps {
+                withSonarQubeEnv(installationName: "LocalSonarqube"){
+                bat "mvn -f com.hiberus.university.ruben.maven.first/pom.xml clean
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+            }
+        }
+    }
+}
